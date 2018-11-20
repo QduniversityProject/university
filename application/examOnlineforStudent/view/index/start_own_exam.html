@@ -10,7 +10,7 @@
     <script src="main.js"></script>
     <script>
         setInterval("CountDown()", 1000);
-        var maxtime = 10;
+        var maxtime = 3000000;
         function CountDown() {
             if (maxtime >= 0) {
                 minutes = Math.floor(maxtime / 60);
@@ -45,11 +45,23 @@
             <!-- {$single.singleanswer_id} -->
         </div>
         {/volist}
+        <h2>多选题</h2>
+        {volist name="multiresult" id="multi" }
+        <div class="info">
+            <h5>题目({$i})：{$multi.multi_title}<br /></h5>
+            选项：
+            <input type="checkbox" name="multi{$i}[]" value="A">{$multi.multi_A}
+            <input type="checkbox" name="multi{$i}[]" value="B">{$multi.multi_B}
+            <input type="checkbox" name="multi{$i}[]" value="C">{$multi.multi_C}
+            <input type="checkbox" name="multi{$i}[]" value="D">{$multi.multi_D}
+            <!-- {$single.singleanswer_id} -->
+        </div>
+        {/volist}
+
+
         <!-- <input type="hidden" name="__hash__" value="{$Request.token}"> -->
         <input type="submit" value="提交试卷">
         <!-- 表单令牌 -->
-
-
         <!-- 或者{$Request.token} -->
     </form>
 
