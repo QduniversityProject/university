@@ -4,6 +4,11 @@ namespace app\examOnlineforStudent\controller;
 use think\Controller;
 use think\Db;
 use app\examOnlineforStudent\model\untest as untstModel;
+use app\examOnlineforStudent\model\unpaper;
+use app\examOnlineforStudent\model\singleAnswer;
+use app\examOnlineforStudent\model\multiAnswer;
+use app\examOnlineforStudent\model\blankAnswer;
+use app\examOnlineforStudent\model\judgmentAnswer;
 
 class Index extends Controller
 {
@@ -36,25 +41,29 @@ class Index extends Controller
        
     //创建自己题库
         //分别获取所有题库的数目
-        $untest1size = Db::name('single_answer')->count();
-        $untest2size = Db::name('multi_answer')->count();
-        $untest3size = Db::name('judgment_answer')->count();
-        $untest4size = Db::name('blank_answer')->count();
-        $singleAnswerIds = array_rand(range(1, $untest1size), 10);
-
-       
-        // $multiAnswerIds=array_rand(range(1,$untest2size),10);
-        // $judgmentAnswerIds=array_rand(range(1,$untest3size),10);
-        // $blankAnswerIds=array_rand(range(1,$untest4size),10);
-        $comma_separated = implode(",", $singleAnswerIds);//生成题目id字符串
+        $singlesize = singleAnswer::count();
+        $multisize = multiAnswer::count();
+        $judgmentsize = judgmentAnswer::count();
+        $blanksize = blankAnswer::count();
+        //随机生成10个数
+        $singleAnswerIdsArr = array_rand(range(1, $singlesize), 10);
+        $multiAnswerIdsArr = array_rand(range(1, $multisize), 10);
+        $judgmentAnswerIdsArr = array_rand(range(1, $judgmentsize), 10);
+        $blankAnswerIdsArr = array_rand(range(1, $blanksize), 10);
+    //生成题目id字符串
+        $singleAnswerIds = implode(",", $singleAnswerIdsArr);
+        $multiAnswerIds = implode(",", $multiAnswerIdsArr);
+        $judgmentAnswerIds = implode(",", $judgmentAnswerIdsArr);
+        $blankAnswerIds = implode(",", $blankAnswerIdsArr);
 
         //保存考生题号
-        $saveSingleIds = Db::execute("insert into unpaper (stu_id ,singleanswer_id) values (5,'$comma_separated')");
-
-        $singleData = Db::query("SELECT * FROM single_answer WHERE singleanswer_id  IN ($comma_separated)");
-        
+        $saveSingleIds = Db::execute("insert into unpaper (stu_id ,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values (5,'$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
+        // 'select * from data where id=:id',['id'=>[4,\PDO::PARAM_INT]]
+        $singleData = Db::query("SELECT * FROM single_answer WHERE singleanswer_id  IN ($singleAnswerIds)");
+        $multiData = multiAnswer::all($multiAnswerIds);
         // $date=Db::query('select * from ');
         $this->assign('singleresult', $singleData);
+        $this->assign('multiresult', $multiData);
         return $this->fetch();
 
     }
