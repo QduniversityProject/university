@@ -50,9 +50,28 @@ class JudgeTestGrade extends Controller
     // $str =implode('',$temp_array);  
     // echo($str);
 
+        // 方法借鉴
+    // function multiToSingle($arr, $delimiter = '->',$key = ' ') {
+    //     $resultAry = array();
+    //     if (!(is_array($arr) && count($arr)>0)) {
+    //         return false;
+    //     }
+    //     foreach ($_GET AS $k=>$val) {
+    //         $newKey = trim($key . $k . $delimiter);
+    //         if (is_array($val) && count($val)>0) {
+    //             $resultAry = array_merge($resultAry, multiToSingle($val, $delimiter, $newKey));
+    //         } else {
+    //             $resultAry[] = $newKey . $val;
+    //         }
+    //     }
+    //     return $resultAry;
+    // }
+
         echo("这是叉开的");
         foreach($_GET as $val){
             if(is_array($val)){
+               $val= implode('',$val);
+            //    $val[] = join(",",$val);
                 dump($val);
             }
         }
