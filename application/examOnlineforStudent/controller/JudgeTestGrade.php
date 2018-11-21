@@ -3,13 +3,27 @@ namespace app\examOnlineforStudent\controller;
 
 use think\Controller;
 use think\Db;
+use app\examOnlineforStudent\model\singleAnswer;
+use app\examOnlineforStudent\model\multiAnswer;
+use app\examOnlineforStudent\model\blankAnswer;
+use app\examOnlineforStudent\model\judgmentAnswer;
+use app\examOnlineforStudent\model\unpaper;
 
 class JudgeTestGrade extends Controller
 {
+   
     //提交试卷并批改
     public function submitTest()
 
     {
+        session_start();
+        $paperid=$_SESSION['id']=44;
+        $quenum1=Db::query("select singleanswer_id from unpaper where paper_id =($paperid)");
+        $quenum = implode("", $quenum1[0]);
+
+        //获得单选的答案数组
+        $singleSheet=Db::query("SELECT single_answer FROM `single_answer` WHERE `singleanswer_id` IN ($quenum) ;");
+        dump($singleSheet);
         //单选答案获取
         // $value[]=$_GET['multi[]'];
         // for ($i = 1; $i <= 3; $i++) {
@@ -40,8 +54,8 @@ class JudgeTestGrade extends Controller
     
 
 // } 
-        print_r($_GET);
-        dump($_GET);
+        // print_r($_GET);
+        // dump($_GET);
     // $multi= $_GET;
     // foreach ($_GET as $val) {
     //     $val = join(",",$val);
@@ -67,22 +81,22 @@ class JudgeTestGrade extends Controller
     //     return $resultAry;
     // }
 
-        echo ("这是叉开的");
-        foreach ($_GET as $val) {
-            $multi;
-            if (is_array($val)) {
-                $multi = implode('', $val);
-            // $val[] = join(",",$val);
-                // $val = explode(",", $val);
-                echo($multi);
-                // dump($val);
-                // $multi=$multi.",";   
+        // echo ("这是叉开的");
+        // foreach ($_GET as $val) {
+        //     $multi;
+        //     if (is_array($val)) {
+        //         $multi = implode('', $val);
+        //     // $val[] = join(",",$val);
+        //         // $val = explode(",", $val);
+        //         echo($multi);
+        //         // dump($val);
+        //         // $multi=$multi.",";   
                 
-            }
+        //     }
            
-        }
-        // dump($multi);
-        echo($multi);
+        // }
+        // // dump($multi);
+        // echo($multi);
      
        
 
