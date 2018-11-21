@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head> 
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                 <h1>教师信息</h1>
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>教师姓名</th>
+                                <th>教师头衔</th>
+                                <th>所属学院</th>
+                                <th>所教课程</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="list" id="teacher"}
+                            <tr>
+                            <td>{$teacher.tea_name}</td>
+                            <td>{$teacher.tea_title}</td>
+                            <td>{$teacher->academy->academy_name}</td>
+                            <td>{$teacher->course->course_name}</td>
+                                </tr>
+                        {/volist} 
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

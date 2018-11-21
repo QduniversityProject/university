@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head> 
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                 <h1>学院信息</h1>
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>学院名称</th>
+                                <th>学院负责人</th>
+                                <th>学院简介</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="list" id="academy"}
+                            <tr>
+                            <td>{$academy.academy_name}</td>
+                            <td>{$academy.academy_director}</td>
+                            <td>{$academy.academy_desc}</td>
+                                </tr>
+                        {/volist} 
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
