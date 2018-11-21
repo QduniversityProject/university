@@ -67,14 +67,24 @@ class JudgeTestGrade extends Controller
     //     return $resultAry;
     // }
 
-        echo("这是叉开的");
-        foreach($_GET as $val){
-            if(is_array($val)){
-               $val= implode('',$val);
-            //    $val[] = join(",",$val);
-                dump($val);
+        echo ("这是叉开的");
+        foreach ($_GET as $val) {
+            $multi;
+            if (is_array($val)) {
+                $multi = implode('', $val);
+            // $val[] = join(",",$val);
+                // $val = explode(",", $val);
+                echo($multi);
+                // dump($val);
+                // $multi=$multi.",";   
+                
             }
+           
         }
+        // dump($multi);
+        echo($multi);
+     
+       
 
 
 
