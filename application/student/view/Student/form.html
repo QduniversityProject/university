@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head> 
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                 <h1>学生信息</h1>
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>学生学号</th>
+                                <th>学生姓名</th>
+                                <th>所属班级</th>
+                                <th>所属专业</th>
+                                <th>所属学院</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="list" id="student"}
+                            <tr>
+                            <td>{$student.stu_rollno}</td>
+                            <td><a href="http://localhost/tp5/public/student/Person/person?stu_id={$student.stu_id}">{$student.stu_name}</a></td>
+                            <td>{$student->classes->class_name}</td>
+                            <td>{$student->major->major_name}</td>
+                            <td>{$student->academy->academy_name}</td>
+                                </tr>
+                        {/volist} 
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

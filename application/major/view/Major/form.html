@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head> 
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                 <h1>专业信息</h1>
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>专业名称</th>
+                                <th>所属学院</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="list" id="major"}
+                            <tr>
+                            <td>{$major.major_name}</td>
+                            <td>{$major->academy->academy_name}</td>
+                                </tr>
+                        {/volist} 
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
