@@ -21,9 +21,7 @@ class JudgeTestGrade extends Controller
         $paperid = $_SESSION['id'] = 44;
 
         //分别获取各题型题号
-        // $quenum1 = Db::query("select* from unpaper where paper_id =($paperid)");
         $unpaper = unpaper::get($paperid);
-
         $singleanswer_id = $unpaper->singleanswer_id;
         $multianswer_id = $unpaper->multianswer_id;
         $judgmentanswer_id = $unpaper->judgmentanswer_id;
@@ -66,14 +64,15 @@ class JudgeTestGrade extends Controller
             //判断是否为数组是为多选答案
             if (is_array($val)) {
 
-                // $multi = implode('', $val);
-                // dump ($val);
+                $multi = implode('', $val);
+                $multiArr[]=$multi;
             } else {
                 $arr[] = $val;
             }
         }
 
         dump($arr);
+        dump($multiArr);
 
 
 

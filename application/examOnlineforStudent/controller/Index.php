@@ -3,7 +3,7 @@ namespace app\examOnlineforStudent\controller;
 
 use think\Controller;
 use think\Db;
-use app\examOnlineforStudent\model\untest as untstModel;
+use app\examOnlineforStudent\model\untest as untestModel;
 use app\examOnlineforStudent\model\unpaper;
 use app\examOnlineforStudent\model\singleAnswer;
 use app\examOnlineforStudent\model\multiAnswer;
@@ -17,25 +17,27 @@ class Index extends Controller
     // php think build --module examOnlineForTeacher
 
     //查看当前考试
-    public function listExam($stuid = 1)
+    public function listExam($stuid=1)
     {   
-        // id=$_GET($_SESSION[]);
+        // $stuid=$_GET($_SESSION['stuid']);
+        // // session 传stuid/找到专业id看有哪些考试
 
-        $test = new untstModel;
-        $test->test_id = "33";
+        $course_id=Db::query("SELECT course_id from uncourse a join unstudent b on a.major_id =b.major_id  where b.stu_id =:id",['id'=>$stuid]);  
+        $course_id=$course_id[0];  
+        $c=implode('',$course_id);
+        $untest=Db::query("select * from untest where course_id=:id",['id'=>$c]);
+        // $untest=Db::table('untest')->where('id',)->find();
+        dump($untest);
 
-        $Data = Db::query('SELECT * FROM single_answer WHERE singleanswer_id  IN (1,2,3)');
-        $data = Db::query('select*from unstudent  where stu_id =:id', ['id' => $stuid]);
-        $this->assign('result', $Data);
-        return $this->fetch();
+        // $Data = Db::query('SELECT * FROM single_answer WHERE singleanswer_id  IN (1,2,3)');
+        // $data = Db::query('select*from unstudent  where stu_id =:id', ['id' => $c]);
+        // $this->assign('result', $Data);
+        // return $this->fetch();
         // dump($examDate);
     }
      //出试卷
     public function startOwnExam()
     {
-        $stuid = 1;
-        //FIXME session 传stuid/找到专业id看有哪些考试
-
         //时间限制
         $currtTime = date("Y-m-d H:i:s");
         // $tsetStartTime=Db::name();
