@@ -39,7 +39,7 @@ class Index extends Controller
         //时间限制
         $currtTime = date("Y-m-d H:i:s");
         // $tsetStartTime=Db::name();
-       
+       //rwerwer
     //创建自己题库
         //分别获取所有题库的数目
         $singlesize = singleAnswer::count();
