@@ -62,9 +62,14 @@ class Index extends Controller
         // 'select * from data where id=:id',['id'=>[4,\PDO::PARAM_INT]]
         $singleData = Db::query("SELECT * FROM single_answer WHERE singleanswer_id  IN ($singleAnswerIds)");
         $multiData = multiAnswer::all($multiAnswerIds);
+        $judgmentData = judgmentAnswer::all($judgmentAnswerIds);
+        $blankData = blankAnswer::all($blankAnswerIds);
+
         // $date=Db::query('select * from ');
         $this->assign('singleresult', $singleData);
         $this->assign('multiresult', $multiData);
+        $this->assign('judgmentresult', $judgmentData);
+        $this->assign('blankresult', $blankData);
         return $this->fetch();
 
     }

@@ -72,6 +72,26 @@
             <!-- {$single.singleanswer_id} -->
         </div>
         {/volist}
+        <h2>判断题</h2>
+        {volist name="judgmentresult" id="judgment" }
+        <div class="info">
+            <h5>题目({$i})：{$multi.multi_title}<br /></h5>
+            选项：
+            <input type="checkbox" name="judgment{$i}" value="A">{$judgment.judgment_A}
+            <input type="checkbox" name="judgment{$i}" value="B">{$judgment.judgment_B}
+            <!-- {$single.singleanswer_id} -->
+        </div>
+        {/volist}
+        <h2>填空题</h2>
+        {volist name="blankresult" id="blank" }
+        <div class="info">
+            <h5>题目({$i})：{$blank.blank_title}<br /></h5>
+            回答：
+            <input type="text" name="blank{$i}">
+            <!-- {$single.singleanswer_id} -->
+        </div>
+        {/volist}
+
 
 
         <!-- <input type="hidden" name="__hash__" value="{$Request.token}"> -->
