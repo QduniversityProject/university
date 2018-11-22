@@ -11,7 +11,8 @@ use app\examOnlineforStudent\model\blankAnswer;
 use app\examOnlineforStudent\model\judgmentAnswer;
 
 class Index extends Controller
-{
+{   
+    //test
     // 创建新文件夹语句
     // php think build --module examOnlineForTeacher
 
@@ -38,7 +39,7 @@ class Index extends Controller
         //时间限制
         $currtTime = date("Y-m-d H:i:s");
         // $tsetStartTime=Db::name();
-       
+       //rwerwer
     //创建自己题库
         //分别获取所有题库的数目
         $singlesize = singleAnswer::count();
@@ -67,7 +68,5 @@ class Index extends Controller
         return $this->fetch();
 
     }
-// 、、gggg
-///4545
 
 }
