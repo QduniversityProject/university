@@ -18,18 +18,13 @@ class JudgeTestGrade extends Controller
     {
         session_start();
         //试卷编号
-        $paperid = $_SESSION['id'] = 2;
-
+        $paperid = $_SESSION['paperid'] = 3;
         //分别获取各题型题号
         $unpaper = unpaper::get($paperid);
         $singleanswer_id = $unpaper->singleanswer_id;
         $multianswer_id = $unpaper->multianswer_id;
         $judgmentanswer_id = $unpaper->judgmentanswer_id;
         $blankanswer_id = $unpaper->blankanswer_id;
-        //题号组合 这里多选单独拿出来
-
-        // $quenum = implode("", $quenum1[0]);
-
         //获得单选的正确答案数组
         $singleSheet = Db::query("SELECT single_answer FROM `single_answer` WHERE `singleanswer_id` IN ($singleanswer_id) ;");
         $singleSheet = array_column($singleSheet, 'single_answer');
@@ -42,37 +37,36 @@ class JudgeTestGrade extends Controller
         //获得填空的正确答案数组
         $blankSheet = Db::query("SELECT blank_answer FROM `blank_answer` WHERE `blankanswer_id` IN ($blankanswer_id) ;");
         $blankSheet = array_column($blankSheet, 'blank_answer');
-        
-        //所有正确答案数组（除了多选题单独一组）
-        $ansersheet = array_merge($singleSheet, $judgmentSheet, $blankSheet);
-    
-
-        dump($ansersheet);
-
-
-        //获取学生的试卷答案
-        //单选答案获取
-       
-       
-        // 分割，
-        // $str =implode(',',$array);  
-
-
-        echo ("这是叉开的");
+        //所有正确答案数组分成4个
+        $singlesize = count($singleSheet);
+        $multisize = count($multiSheet);
+        $judgmentsize = count($judgmentSheet);
+        $blanksize = count($blankSheet);
         foreach ($_GET as $val) {
-            // $multi;
             //判断是否为数组是为多选答案
             if (is_array($val)) {
-
                 $multi = implode('', $val);
-                $multiArr[]=$multi;
+                $multianser[] = $multi;
             } else {
-                $arr[] = $val;
+                $single[] = $val;
             }
         }
-
-        dump($arr);
-        dump($multiArr);
+        for ($x = 0; $x < count($single); $x++) {
+            if ($x < $singlesize) {
+                $singleanswer[] = $single[$x];
+            } else if ($x < $multisize + $singlesize) {
+                $judgmentanswer[] = $single[$x];
+            } else if ($x < $multisize + $singlesize + $judgmentsize) {
+                $blankanswer[] = $single[$x];
+            }
+        }
+        $singlecurrt=0;
+        for($i=0;$i<$singlesize;$i++){
+            
+            if($singleSheet[$i]==$singleanswer[$i]){$singlecurrt++;}
+            
+        }
+        dump($singlecurrt);
 
 
 

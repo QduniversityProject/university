@@ -273,6 +273,7 @@ CREATE TABLE untest
 (
 test_id int auto_increment,
 test_desc varchar(50),
+test_type int not null,
 course_id int NOT NULL,
 tea_id int NOT NULL,
 single_qus_num int,
@@ -289,9 +290,9 @@ primary key(test_id),
 FOREIGN KEY (course_id) REFERENCES uncourse (course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('1', '考试1', '1', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 15：30');
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('2', '考试2', '2', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('3', '套你猴子', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('1', '考试1', '1','1', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 15：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('2', '考试2', '1', '2', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('3', '套你猴子', '2','3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
 
 
 /*试卷表*/ /*试卷编号(主键) 考试学生编号(外键) 抽中单选题所有编号 抽中多选题所有编号 抽中判断题所有编号 抽中填空题所有编号  成绩*/
@@ -299,6 +300,7 @@ CREATE TABLE unpaper
 (
 paper_id int auto_increment,
 stu_id int NOT NULL,
+test_id int not null,
 singleanswer_id varchar(50),
 multianswer_id varchar(50),
 judgmentanswer_id varchar(50),

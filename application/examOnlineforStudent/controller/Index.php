@@ -32,6 +32,9 @@ class Index extends Controller
     public function startOwnExam($stuid = 1)
     {
 
+        // 做一个判断 当前表是否unpaper有该学生成绩为空的列 为考试未完成的 筛选出paperid直接进入
+
+        
         // $stuid=$_GET($_SESSION['stuid']);
 
         //时间限制
@@ -74,7 +77,8 @@ class Index extends Controller
         // dump($judgmentIds);
         // dump($blankIds);
         //保存考生题号
-        Db::execute("insert into unpaper (stu_id ,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values ('$stuid','$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
+        $test_id=$_GET['test_id'];
+        Db::execute("insert into unpaper (stu_id ,test_id,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values ('$stuid','$test_id','$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
         
         //获取题目
         $singleData = Db::query("SELECT * FROM single_answer WHERE singleanswer_id  IN ($singleAnswerIds)");
