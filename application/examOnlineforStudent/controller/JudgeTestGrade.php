@@ -18,7 +18,7 @@ class JudgeTestGrade extends Controller
     {
         session_start();
         //试卷编号
-        $paperid = $_SESSION['id'] = 44;
+        $paperid = $_SESSION['id'] = 2;
 
         //分别获取各题型题号
         $unpaper = unpaper::get($paperid);

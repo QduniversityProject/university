@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
 
 USE University;
@@ -143,7 +142,7 @@ insert into unclass values(10,'艺术学院2班',10);
 /*学生表*/ /*学生ID(主键) 学生学号 学生姓名 班级ID(外键) 学生生日 学生住址*/
 CREATE TABLE unstudent
 (
-stu_id int auto_increment,
+stu_id int auto_increment primary key,
 stu_rollno varchar(50) NOT NULL,
 stu_name varchar(50) NOT NULL,
 stu_sex varchar(50) NOT NULL,
@@ -151,11 +150,8 @@ class_id int NOT NULL,
 stu_birth date,
 stu_address varchar(200),
 academy_id int NOT NULL,
-major_id int NOT NULL,
-primary key(stu_id),
-FOREIGN KEY (class_id) REFERENCES unclass (class_id),
-FOREIGN KEY (academy_id) REFERENCES unacademy (academy_id),
-FOREIGN KEY (major_id) REFERENCES unmajor (major_id)
+major_ids varchar(50) NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 select * from unstudent;
@@ -915,7 +911,7 @@ insert into blank_answer values(59,2,4,'程序设计语言的()性通常指这�
 insert into blank_answer values(60,2,4,'对发现错误较多的程序模块，应进行()测试','','重点',6);
 
 /*体育学院与艺术学院无书面考题*/
-drop table untest;
+
 /*考试表*/ /*考试编号(主键) 所考课程编号(外键) 申请考试教师编号(外键) 开始时间 结束时间*/
 CREATE TABLE untest
 (
