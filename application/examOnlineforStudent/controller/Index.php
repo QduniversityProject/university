@@ -21,7 +21,7 @@ class Index extends Controller
     {   
         // $stuid=$_GET($_SESSION['stuid']);
         // // session 传stuid/找到专业id看有哪些考试
-        $course_id = Db::query("select major_ids from unstudent where stu_id =:id", ['id' => $stuid]);
+        $course_id = Db::query("select course_ids from unmajor a join unstudent b on a.major_id= b.major_id where b.stu_id =:id", ['id' => $stuid]);
         $course_id = $course_id[0];
         $c = implode(',', $course_id);
         $untest = Db::query("select * from untest where course_id in ($c)");

@@ -1,5 +1,6 @@
-CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
+drop database University;
 
+CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
 USE University;
 
 /*学院表*/ /*学院ID(主键) 学院名称 学院描述 学院主管*/
@@ -27,26 +28,27 @@ major_id int NOT NULL AUTO_INCREMENT,
 major_name varchar(50) NOT NULL,
 major_desc varchar(200),
 academy_id int NOT NULL,
+course_ids varchar (50),
 PRIMARY KEY (major_id),
 FOREIGN KEY (academy_id) REFERENCES unacademy (academy_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 select * from unmajor;
 
-insert into unmajor values(1,'国际贸易','',1);
-insert into unmajor values(2,'保险精算','',1);
+insert into unmajor values(1,'国际贸易','',1,'1,2,3');
+insert into unmajor values(2,'保险精算','',1,'1,2,3');
 
-insert into unmajor values(3,'马克思主义','',2);
-insert into unmajor values(4,'近代史','',2);
+insert into unmajor values(3,'马克思主义','',2,'1');
+insert into unmajor values(4,'近代史','',2,'1');
 
-insert into unmajor values(5,'软件工程','',3);
-insert into unmajor values(6,'网络维护','',3);
+insert into unmajor values(5,'软件工程','',3,'1');
+insert into unmajor values(6,'网络维护','',3,'1');
 
-insert into unmajor values(7,'自行车','',4);
-insert into unmajor values(8,'排球','',4);
+insert into unmajor values(7,'自行车','',4,'1');
+insert into unmajor values(8,'排球','',4,'1');
 
-insert into unmajor values(9,'素描','',5);
-insert into unmajor values(10,'声乐','',5);
+insert into unmajor values(9,'素描','',5,'1');
+insert into unmajor values(10,'声乐','',5,'1');
 
 /*课程表*/ /*课程ID(主键) 课程名称 专业描述 是否必修课 是否公选课 学分 课时 专业ID(外键) 教材封面*/
 CREATE TABLE uncourse
@@ -150,7 +152,7 @@ class_id int NOT NULL,
 stu_birth date,
 stu_address varchar(200),
 academy_id int NOT NULL,
-major_ids varchar(50) NOT NULL
+major_id varchar(50) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -264,6 +266,67 @@ primary key(singleanswer_id),
 FOREIGN KEY (course_id) REFERENCES uncourse (course_id),
 FOREIGN KEY (qbank_no) REFERENCES unqbank_type (qbank_no),
 FOREIGN KEY (questiontype_no) REFERENCES unquestion_type (questiontype_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*考试表*/ /*考试编号(主键) 所考课程编号(外键) 申请考试教师编号(外键) 开始时间 结束时间*/
+CREATE TABLE untest
+(
+test_id int auto_increment,
+test_desc varchar(50),
+course_id int NOT NULL,
+tea_id int NOT NULL,
+single_qus_num int,
+multi_qus_num int ,
+judgment_qus_num int,
+blank_qus_num int,
+single_score int,
+multi_score int,
+judgment_score int,
+blank_score int,
+start_time varchar(50),
+end_time varchar(50),
+primary key(test_id),
+FOREIGN KEY (course_id) REFERENCES uncourse (course_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('1', '考试1', '1', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 15：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('2', '考试2', '2', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('3', '套你猴子', '3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
+
+
+/*试卷表*/ /*试卷编号(主键) 考试学生编号(外键) 抽中单选题所有编号 抽中多选题所有编号 抽中判断题所有编号 抽中填空题所有编号  成绩*/
+CREATE TABLE unpaper 
+(
+paper_id int auto_increment,
+stu_id int NOT NULL,
+singleanswer_id varchar(50),
+multianswer_id varchar(50),
+judgmentanswer_id varchar(50),
+blankanswer_id varchar(50),
+score varchar(50),
+primary key(paper_id),
+FOREIGN KEY (stu_id) REFERENCES unstudent (stu_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*成绩表*/ /*成绩编号(主键) 考试学生编号(外键) 专业编号(外键) 课程编号(外键) 试卷编号(外键) 描述 成绩 单选题数量 多选题数量 判断题数量 填空题数量*/
+CREATE TABLE ungrade 
+(
+grade_id int auto_increment,
+stu_id int NOT NULL,
+major_id int NOT NULL,	
+course_id int NOT NULL,
+paper_id int NOT NULL,
+garde_desc varchar(50),
+grade varchar(50) NOT NULL,
+singleanswer_num varchar(50),
+multianswer_num varchar(50),
+judgmentanswer_num varchar(50),
+blankanswer_num varchar(50),
+primary key(grade_id),
+FOREIGN KEY (stu_id) REFERENCES unstudent (stu_id),
+FOREIGN KEY (major_id) REFERENCES unmajor (major_id),
+FOREIGN KEY (course_id) REFERENCES uncourse (course_id),
+FOREIGN KEY (paper_id) REFERENCES unpaper (paper_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 select * from single_answer;
@@ -912,60 +975,6 @@ insert into blank_answer values(60,2,4,'对发现错误较多的程序模块，�
 
 /*体育学院与艺术学院无书面考题*/
 
-/*考试表*/ /*考试编号(主键) 所考课程编号(外键) 申请考试教师编号(外键) 开始时间 结束时间*/
-CREATE TABLE untest
-(
-test_id int auto_increment,
-test_desc varchar(50),
-course_id int NOT NULL,
-tea_id int NOT NULL,
-single_qus_num int,
-multi_qus_num int ,
-judgment_qus_num int,
-blank_qus_num int,
-single_score int,
-multi_score int,
-judgment_score int,
-blank_score int,
-start_time varchar(50),
-end_time varchar(50),
-primary key(test_id),
-FOREIGN KEY (course_id) REFERENCES uncourse (course_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*试卷表*/ /*试卷编号(主键) 考试学生编号(外键) 抽中单选题所有编号 抽中多选题所有编号 抽中判断题所有编号 抽中填空题所有编号  成绩*/
-CREATE TABLE unpaper 
-(
-paper_id int auto_increment,
-stu_id int NOT NULL,
-singleanswer_id varchar(50),
-multianswer_id varchar(50),
-judgmentanswer_id varchar(50),
-blankanswer_id varchar(50),
-score varchar(50),
-primary key(paper_id),
-FOREIGN KEY (stu_id) REFERENCES unstudent (stu_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*成绩表*/ /*成绩编号(主键) 考试学生编号(外键) 专业编号(外键) 课程编号(外键) 试卷编号(外键) 描述 成绩 单选题数量 多选题数量 判断题数量 填空题数量*/
-CREATE TABLE ungrade 
-(
-grade_id int auto_increment,
-stu_id int NOT NULL,
-major_id int NOT NULL,	
-course_id int NOT NULL,
-paper_id int NOT NULL,
-garde_desc varchar(50),
-grade varchar(50) NOT NULL,
-singleanswer_num varchar(50),
-multianswer_num varchar(50),
-judgmentanswer_num varchar(50),
-blankanswer_num varchar(50),
-primary key(grade_id),
-FOREIGN KEY (stu_id) REFERENCES unstudent (stu_id),
-FOREIGN KEY (major_id) REFERENCES unmajor (major_id),
-FOREIGN KEY (course_id) REFERENCES uncourse (course_id),
-FOREIGN KEY (paper_id) REFERENCES unpaper (paper_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
