@@ -3,24 +3,29 @@ namespace app\examOnlineforStudent\controller;
 
 use think\Controller;
 use think\Db;
-use app\examOnlineforStudent\model\singleAnswer;
-use app\examOnlineforStudent\model\multiAnswer;
-use app\examOnlineforStudent\model\blankAnswer;
-use app\examOnlineforStudent\model\judgmentAnswer;
 use app\examOnlineforStudent\model\unpaper;
+use app\examOnlineforStudent\model\untest;
 
 class JudgeTestGrade extends Controller
 {
    
     //提交试卷并批改
-    public function submitTest()
+    public function submitTest($stuid = 1)
 
     {
-        session_start();
-        //试卷编号
-        $paperid = $_SESSION['paperid'] = 3;
+       // $stuid=$_GET($_SESSION['stuid']);
+       //通过stuid和testid查到试卷id
+
+        //试卷编号 iid
+        $testId = $_GET['test_id'];
+        $paperid3 = Db::query('select paper_id from unpaper where stu_id =:stuid and test_id =:testid', ['stuid' => $stuid, 'testid' => $testId]);
+        $id = $paperid3[0];
+        $id3 = array_values($id);
+        $iid = $id3[0];
+        //有点乱但是就是类型转换
+
         //分别获取各题型题号
-        $unpaper = unpaper::get($paperid);
+        $unpaper = unpaper::get($iid);
         $singleanswer_id = $unpaper->singleanswer_id;
         $multianswer_id = $unpaper->multianswer_id;
         $judgmentanswer_id = $unpaper->judgmentanswer_id;
@@ -46,7 +51,7 @@ class JudgeTestGrade extends Controller
             //判断是否为数组是为多选答案
             if (is_array($val)) {
                 $multi = implode('', $val);
-                $multianser[] = $multi;
+                $multianswer[] = $multi;
             } else {
                 $single[] = $val;
             }
@@ -60,17 +65,49 @@ class JudgeTestGrade extends Controller
                 $blankanswer[] = $single[$x];
             }
         }
-        $singlecurrt=0;
-        for($i=0;$i<$singlesize;$i++){
-            
-            if($singleSheet[$i]==$singleanswer[$i]){$singlecurrt++;}
-            
+        $singlecurrt = 0;
+        for ($i = 0; $i < $singlesize; $i++) {
+
+            if ($singleSheet[$i] == $singleanswer[$i]) {
+                $singlecurrt++;
+            }
+
         }
-        dump($singlecurrt);
+        $multicurrt = 0;
+        for ($i = 0; $i < $multisize; $i++) {
 
+            if ($multiSheet[$i] == $multianswer[$i]) {
+                $multicurrt++;
+            }
 
+        }
+        $judgmentcurrt = 0;
+        for ($i = 0; $i < $singlesize; $i++) {
 
+            if ($judgmentSheet[$i] == $judgmentanswer[$i]) {
+                $judgmentcurrt++;
+            }
 
+        }
+        $blankcurrt = 0;
+        for ($i = 0; $i < $blanksize; $i++) {
+
+            if ($blankSheet[$i] == $blankanswer[$i]) {
+                $blankcurrt++;
+            }
+
+        }
+
+        // dump($singlecurrt);
+
+        //打分时刻
+        $testQues = untest::get($iid);
+        $singleValue = $testQues->single_qus_num;
+        $mValue = $testQues->multi_qus_num;
+        $jValue = $testQues->judgment_qus_num;
+        $bValue = $testQues->blank_qus_num;
+        $score = $singlecurrt * $singleValue + $multicurrt * $mValue + $judgmentcurrt * $jValue + $blankcurrt * $bValue;
+        dump($score);
 
 
     }
