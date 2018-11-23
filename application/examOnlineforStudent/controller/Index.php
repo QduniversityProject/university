@@ -19,7 +19,7 @@ class Index extends Controller
     //查看当前考试
     public function listExam($stuid = 1)
     {   
-        // $stuid=$_GET($_SESSION['stuid']);
+        $stuid=$_GET($_COOKIE['stu_id']);
         // // session 传stuid/找到专业id看有哪些考试
         $course_id = Db::query("select course_ids from unmajor a join unstudent b on a.major_id= b.major_id where b.stu_id =:id", ['id' => $stuid]);
         $course_id = $course_id[0];
@@ -33,14 +33,9 @@ class Index extends Controller
     {
 
         // 做一个判断 当前表是否unpaper有该学生成绩为空的列 为考试未完成的 筛选出paperid直接进入
-
-        
         // $stuid=$_GET($_SESSION['stuid']);
 
-        //时间限制
-        $currtTime = date("Y-m-d H:i:s");
-        // $tsetStartTime=Db::name();
-       //rwerwer
+        $testId = $_GET['test_id'];
     //创建自己题库
         //获得单选题题号数组
         $singlecourse_id = singleAnswer::where('course_id', $_GET['courseId'])->column('singleanswer_id');
@@ -77,7 +72,7 @@ class Index extends Controller
         // dump($judgmentIds);
         // dump($blankIds);
         //保存考生题号
-        $test_id=$_GET['test_id'];
+        $test_id = $_GET['test_id'];
         Db::execute("insert into unpaper (stu_id ,test_id,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values ('$stuid','$test_id','$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
         
         //获取题目
@@ -90,6 +85,7 @@ class Index extends Controller
         $this->assign('multiresult', $multiData);
         $this->assign('judgmentresult', $judgmentData);
         $this->assign('blankresult', $blankData);
+        $this->assign('testId', $testId);
         return $this->fetch();
 
     }

@@ -45,6 +45,34 @@
 			border-top: 1px solid #eee;
 		}
 	</style>
+	<script>
+		var btn = document.getElementById("btn");
+		
+	   btn.onclick = function() {
+		   var width =  window.screen.width;
+		   var height =   window.screen.height;
+		   var elem = document.getElementById("div1");
+		   requestFullScreen(elem);
+	   }
+		
+	   function requestFullScreen(element) {
+		   if (element.requestFullscreen) {
+			   element.requestFullscreen();
+		   }
+	   //FireFox
+		   else if (element.mozRequestFullScreen) {
+			   element.mozRequestFullScreen();
+		   }
+	   //Chrome等
+		   else if (element.webkitRequestFullScreen) {
+			   element.webkitRequestFullScreen();
+		   }
+	   //IE11
+		   else if (element.msRequestFullscreen) {
+			   element.msRequestFullscreen();
+		   }
+	   };
+	   </script>
 </head>
 
 <body>
@@ -59,6 +87,8 @@
 			<input type="hidden" name="judgment_qus_num" value="{$untest.judgment_qus_num}"> 
 			<input type="hidden" name="blank_qus_num" value="{$untest.blank_qus_num}"> 
 			<input type="hidden" name="test_id" value="{$untest.test_id}"> 
+			<input type="hidden" name="start_time" value="{$untest.start_time}">
+			<input type="hidden" name="end_time" value="{$untest.end_time}">
 			<input type="submit" value="进入测试">
 		</form>
 	</div>
@@ -71,3 +101,4 @@
 </body>
 
 </html>
+<!-- onClick="window.open(document.location, 'big', 'fullscreen=yes')" -->
