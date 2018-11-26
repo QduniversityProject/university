@@ -87,6 +87,7 @@ CREATE TABLE unteacher
 (
 tea_id int auto_increment,
 tea_name varchar(50) NOT NULL,
+tea_rollno varchar(50) NOT NULL,
 tea_title varchar(50) NOT NULL,
 academy_id int NOT NULL,
 course_id int NOT NULL,
@@ -99,20 +100,21 @@ FOREIGN KEY (course_id) REFERENCES uncourse (course_id)
 
 select * from unteacher;
 
-insert into unteacher values(1,'Riri Williams','讲师',1,1,'','');
-insert into unteacher values(2,'Pepper','教授',1,2,'','');
+insert into unteacher values(1,'Riri Williams','1000','讲师',1,1,'','');
+insert into unteacher values(2,'Pepper','1001','教授',1,2,'','');
 
-insert into unteacher values(3,'Bucky Barnes','讲师',2,3,'','');
-insert into unteacher values(4,'Sam Wilson','讲师',2,4,'','');
+insert into unteacher values(3,'Bucky Barnes','2000','讲师',2,3,'','');
+insert into unteacher values(4,'Sam Wilson','2001','讲师',2,4,'','');
 
-insert into unteacher values(5,'Hulk','教授',3,5,'','');
-insert into unteacher values(6,'Red Hulk','副教授',3,6,'','');
+insert into unteacher values(5,'Hulk','3000','教授',3,5,'','');
+insert into unteacher values(6,'Red Hulk','3001','副教授',3,6,'','');
 
 
-insert into unteacher values(7,'Loki','讲师',4,7,'','');
-insert into unteacher values(8,'Hela','讲师',4,8,'','');
-insert into unteacher values(9,'Barton','副教授',5,9,'','');
-insert into unteacher values(10,'Wanda','副教授',5,10,'','');
+insert into unteacher values(7,'Loki','4000','讲师',4,7,'','');
+insert into unteacher values(8,'Hela','4001','讲师',4,8,'','');
+
+insert into unteacher values(9,'Barton','5000','副教授',5,9,'','');
+insert into unteacher values(10,'Wanda','5001','副教授',5,10,'','');
 
 /*班级表*/ /*班级ID(主键) 班级名称 专业ID(外键)*/
 CREATE TABLE unclass
@@ -210,14 +212,28 @@ user_id int auto_increment,
 user_name varchar(50) NOT NULL,
 user_password varchar(50) NOT NULL,
 user_photo varchar(200),
+user_zhuangtai int,
 role_id int NOT NULL,
 rec_time varchar(200),
+time_last_error varchar(200), 
 rec_address varchar(200),
 rec_useraent varchar(200),
 primary key(user_id),
 FOREIGN KEY (role_id) REFERENCES unrole (role_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+select * from unuser;
+
+insert into unuser values(1,'Leo','123','',0,1,'','','','');
+insert into unuser values(2,'Coulson','123','',0,1,'','','','');
+insert into unuser values(3,'Bill','123','',0,1,'','','','');
+
+insert into unuser values(4,'1000','123','',0,2,'','','','');
+insert into unuser values(5,'1001','123','',0,2,'','','','');
+
+insert into unuser values(6,'201540704102','123','',0,3,'','','','');
+insert into unuser values(7,'201540704602','123','',0,3,'','','','');
 select * from unuser;
 
 /*题库类型表*/ /*题库编号(主键) 题库类型*/
