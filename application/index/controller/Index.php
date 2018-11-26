@@ -123,7 +123,7 @@ class Index extends Controller
 		->update(['rec_time' => $time, 'rec_address' => $ip, 'rec_useraent' => $browser]);
 	
     	if($has['role_id'] == 1){
-            $this->redirect(url('index/administrator'));
+            $this->redirect(url('index/admin'));
         }
         else if($has['role_id'] == 2){
             $this->redirect(url('teacher/index'));
@@ -145,11 +145,17 @@ class Index extends Controller
     	
     	$this->redirect(url('index/login'));
 	}
-	
-	public function administrator()
+
+    public function admin()
     {
-		echo "您好： " . cookie('user_name') . ', <a href="' . url('index/loginout') . '">退出</a> , 
-		您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');
-    }
+        return $this->fetch();
+    } 
+
+	
+	// public function administrator()
+    // {
+	// 	echo "您好： " . cookie('user_name') . ', <a href="' . url('index/loginout') . '">退出</a> , 
+	// 	您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');
+    // }
 
 }
