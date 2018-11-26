@@ -993,6 +993,16 @@ insert into blank_answer values(60,2,4,'对发现错误较多的程序模块，�
 
 /*体育学院与艺术学院无书面考题*/
 
-
-
-
+CREATE TABLE unmark 
+(
+mark_id int auto_increment,
+stu_id int NOT NULL,
+test_id int NOT NULL,
+mark varchar(200) NOT NULL,	
+primary key(mark_id),
+FOREIGN KEY (stu_id) REFERENCES unstudent (stu_id),
+FOREIGN KEY (test_id) REFERENCES untest (test_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into unmark values(1,1,1,'96');
+insert into unmark values(2,1,1,'86');
+insert into unmark values(3,2,2,'66');
