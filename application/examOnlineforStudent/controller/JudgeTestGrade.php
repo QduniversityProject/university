@@ -114,8 +114,8 @@ class JudgeTestGrade extends Controller
         // dump($singlecurrt);
 
         //打分时刻
-        $testQues = untest::get($iid);
-        dump($iid);
+
+        $testQues = untest::get($_GET['test_id']);
         $singleValue = $testQues->single_qus_num;
         $mValue = $testQues->multi_qus_num;
         $jValue = $testQues->judgment_qus_num;
