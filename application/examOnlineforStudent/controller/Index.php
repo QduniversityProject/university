@@ -37,11 +37,11 @@ class Index extends Controller
 
         $testId = $_GET['test_id'];
     //创建自己题库
-        //获得单选题题号数组
-        $singlecourse_id = singleAnswer::where('course_id', $_GET['courseId'])->column('singleanswer_id');
-        $multicourse_id = multiAnswer::where('course_id', $_GET['courseId'])->column('multianswer_id');
-        $judgmentcourse_id = judgmentAnswer::where('course_id', $_GET['courseId'])->column('judgmentanswer_id');
-        $blankcourse_id = blankAnswer::where('course_id', $_GET['courseId'])->column('blankanswer_id');
+        //获得单选题题号数组 //并且带考试类型
+        $singlecourse_id = singleAnswer::where('course_id', $_GET['courseId'])->where('qbank_no',$_GET['qbank_no'])->column('singleanswer_id');
+        $multicourse_id = multiAnswer::where('course_id', $_GET['courseId'])->where('qbank_no',$_GET['qbank_no'])->column('multianswer_id');
+        $judgmentcourse_id = judgmentAnswer::where('course_id', $_GET['courseId'])->where('qbank_no',$_GET['qbank_no'])->column('judgmentanswer_id');
+        $blankcourse_id = blankAnswer::where('course_id', $_GET['courseId'])->where('qbank_no',$_GET['qbank_no'])->column('blankanswer_id');
         //随机n个
         $singleAnswerIdsArr = array_rand($singlecourse_id, $_GET['single_qus_num']);
         $multiAnswerIdsArr = array_rand($multicourse_id, $_GET['multi_qus_num']);
@@ -72,7 +72,7 @@ class Index extends Controller
         // dump($judgmentIds);
         // dump($blankIds);
         //保存考生题号
-        $test_id = $_GET['test_id'];
+
         Db::execute("insert into unpaper (stu_id ,test_id,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values ('$stuid','$test_id','$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
         
         //获取题目
