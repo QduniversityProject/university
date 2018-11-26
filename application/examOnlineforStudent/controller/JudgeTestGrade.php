@@ -114,7 +114,8 @@ class JudgeTestGrade extends Controller
         // dump($singlecurrt);
 
         //打分时刻
-        $testQues = untest::get($iid);
+
+        $testQues = untest::get($_GET['test_id']);
         $singleValue = $testQues->single_qus_num;
         $mValue = $testQues->multi_qus_num;
         $jValue = $testQues->judgment_qus_num;
@@ -149,7 +150,7 @@ class JudgeTestGrade extends Controller
         $mWrong = multiAnswer::all($mids);
         $jWrong = judgmentAnswer::all($jids);
         $bWrong = blankAnswer::all($bids);
-
+        Db::execute("insert into unmark (stu_id ,test_id,mark) values ('$stuid','$testId','$score')");
 
         $this->assign('singleresult', $sWrong);
         $this->assign('multiresult', $mWrong);

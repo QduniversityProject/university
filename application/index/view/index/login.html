@@ -92,7 +92,7 @@ session_start(); //启用会话变量
             <img id="images" class="img-fluid d-block" src="__ROOT__/static/images/logo.png">
           <h1 id="fonts" class="mb-4 text-light">Log in</h1>
           <form action="{:url('index/dologin')}" method="post">
-              <div class="form-group"> <input type="number" class="form-control" name="userid" placeholder="Enter email" id="form9"> </div>
+              <div class="form-group"> <input type="text" class="form-control" name="userid" placeholder="Enter email" id="form9"> </div>
               <div class="form-group mb-3"> <input type="password" class="form-control" name="password" placeholder="Password" id="form10"> <small class="form-text text-muted text-right">
                 <a id="fyp" href="#"> Forget your password?</a>
               </small> </div> <button id="btn" type="submit" class="btn btn-primary">Submit</button>
