@@ -34,10 +34,7 @@ class Index extends Controller
 
         // 做一个判断 当前表是否unpaper有该学生成绩为空的列 为考试未完成的 筛选出paperid直接进入
         // $stuid=$_GET($_SESSION['stuid']);
-
-    //    dump($_GET['end_time']);
-    //    dump(strtotime($_GET['start_time']));
-
+  
 
         $testId = $_GET['test_id'];
     //创建自己题库
