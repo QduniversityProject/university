@@ -5,6 +5,10 @@ use think\Controller;
 use think\Db;
 use app\examOnlineforStudent\model\unpaper;
 use app\examOnlineforStudent\model\untest;
+use app\examOnlineforStudent\model\singleAnswer;
+use app\examOnlineforStudent\model\multiAnswer;
+use app\examOnlineforStudent\model\blankAnswer;
+use app\examOnlineforStudent\model\judgmentAnswer;
 
 class JudgeTestGrade extends Controller
 {
@@ -66,11 +70,14 @@ class JudgeTestGrade extends Controller
             }
         }
         $singlecurrt = 0;
+        $singleWrongNum = [];
         for ($i = 0; $i < $singlesize; $i++) {
 
             if ($singleSheet[$i] == $singleanswer[$i]) {
                 $singlecurrt++;
-            }
+            } else
+            //错题的题号第几位
+            $singleWrongNum[] = $i;
 
         }
         $multicurrt = 0;
@@ -78,7 +85,9 @@ class JudgeTestGrade extends Controller
 
             if ($multiSheet[$i] == $multianswer[$i]) {
                 $multicurrt++;
-            }
+            } else
+            //错题的题号第几位
+            $multiWrongNum[] = $i;
 
         }
         $judgmentcurrt = 0;
@@ -86,7 +95,9 @@ class JudgeTestGrade extends Controller
 
             if ($judgmentSheet[$i] == $judgmentanswer[$i]) {
                 $judgmentcurrt++;
-            }
+            } else
+            //错题的题号第几位
+            $judgmentWrongNum[] = $i;
 
         }
         $blankcurrt = 0;
@@ -94,7 +105,9 @@ class JudgeTestGrade extends Controller
 
             if ($blankSheet[$i] == $blankanswer[$i]) {
                 $blankcurrt++;
-            }
+            } else
+            //错题的题号第几位
+            $blankWrongNum[] = $i;
 
         }
 
@@ -107,7 +120,46 @@ class JudgeTestGrade extends Controller
         $jValue = $testQues->judgment_qus_num;
         $bValue = $testQues->blank_qus_num;
         $score = $singlecurrt * $singleValue + $multicurrt * $mValue + $judgmentcurrt * $jValue + $blankcurrt * $bValue;
-        dump($score);
+        $singleanswer_id = explode(',', $singleanswer_id);
+        foreach ($singleWrongNum as $key => $value) {
+            $singlewrongQuesNum[] = $singleanswer_id[$singleWrongNum[$key]];
+        }
+        $multianswer_id = explode(',', $multianswer_id);
+        foreach ($multiWrongNum as $key => $value) {
+            $multiwrongQuesNum[] = $multianswer_id[$multiWrongNum[$key]];
+        }
+
+
+        $judgmentanswer_id = explode(',', $judgmentanswer_id);
+        foreach ($judgmentWrongNum as $key => $value) {
+            $judgmentwrongQuesNum[] = $judgmentanswer_id[$judgmentWrongNum[$key]];
+        }
+
+        $blankanswer_id = explode(',', $blankanswer_id);
+        foreach ($blankWrongNum as $key => $value) {
+            $blankwrongQuesNum[] = $blankanswer_id[$blankWrongNum[$key]];
+        }
+
+        $sids = implode(",", $singlewrongQuesNum);
+        $mids = implode(",", $multiwrongQuesNum);
+        $jids = implode(",", $judgmentwrongQuesNum);
+        $bids = implode(",", $blankwrongQuesNum);
+
+        $sWrong = singleAnswer::all($sids);
+        $mWrong = multiAnswer::all($mids);
+        $jWrong = judgmentAnswer::all($jids);
+        $bWrong = blankAnswer::all($bids);
+
+
+        $this->assign('singleresult', $sWrong);
+        $this->assign('multiresult', $mWrong);
+        $this->assign('judgmentresult', $jWrong);
+        $this->assign('blankresult', $bWrong);
+        $this->assign('score', $score);
+        return $this->fetch();
+
+
+
 
 
     }

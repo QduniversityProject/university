@@ -19,7 +19,7 @@ class Index extends Controller
     //查看当前考试
     public function listExam($stuid = 1)
     {   
-        $stuid=$_GET($_COOKIE['stu_id']);
+        // $stuid=$_GET($_COOKIE['stu_id']);
         // // session 传stuid/找到专业id看有哪些考试
         $course_id = Db::query("select course_ids from unmajor a join unstudent b on a.major_id= b.major_id where b.stu_id =:id", ['id' => $stuid]);
         $course_id = $course_id[0];
