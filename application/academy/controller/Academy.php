@@ -10,5 +10,5 @@ class Academy
     {
         $list = AcademyModel::all();
         return view('form',['list'=>$list]);
-    }
+    } 
 }

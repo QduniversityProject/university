@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="theme.css" type="text/css"> </head>    
 </head>
 <body>
-        {include file="Academy/heads"/}
+        {include file="Admin/heads"/}
     <div class="container">
         <div class="row">
             <div class="offset-md-1 col-md-10">
@@ -24,20 +24,11 @@
                                 <th>学院简介</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        {volist name="list" id="academy"}
-                            <tr>
-                            <td>{$academy.academy_name}</td>
-                            <td>{$academy.academy_director}</td>
-                            <td>{$academy.academy_desc}</td>
-                                </tr>
-                        {/volist} 
-                        </tbody>
                     </table>
             </div>
         </div>
     </div>
-    {include file="Academy/footer"/}
+    {include file="Admin/footer"/}
 </body>
 </html>
 
