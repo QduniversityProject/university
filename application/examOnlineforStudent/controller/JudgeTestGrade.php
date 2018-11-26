@@ -149,7 +149,7 @@ class JudgeTestGrade extends Controller
         $mWrong = multiAnswer::all($mids);
         $jWrong = judgmentAnswer::all($jids);
         $bWrong = blankAnswer::all($bids);
-
+        Db::execute("insert into unpaper (stu_id ,test_id,singleanswer_id,multianswer_id,judgmentanswer_id,blankanswer_id) values ('$stuid','$test_id','$singleAnswerIds','$multiAnswerIds','$judgmentAnswerIds','$blankAnswerIds')");
 
         $this->assign('singleresult', $sWrong);
         $this->assign('multiresult', $mWrong);
