@@ -32,12 +32,34 @@ class Index extends Controller
     		
     		$this->error('用户名不存在');
     	}
-    	
+		
+		if(!session('?count')){
+			session('count',3);//可输入次数
+		}
+		//验证帐号状态
+		if(session('count') == 0){
+			$etime = ceil(30-((time() - session('error_time'))/60));
+			if((time() - session('error_time')) > 1800){
+				session('count', 3);
+			}
+			else{
+				$this->error('密码错误超过3次,请'.$etime.'分钟之后登录！');
+			}
+		}
+
     	// 验证密码
     	//if($has['user_password'] != md5($param['password'])){
-		if($has['user_password'] != $param['password']){
-    		
-    		$this->error('密码输入错误');
+		if($has['user_password'] !== $param['password']){
+			if(session('count') > 0){
+				$count = session('count');
+				$count -= 1;
+				session('count', $count);
+			}
+			
+			session('error_time',time());
+			
+			//dump(session('count'));
+    		$this->error('密码输入错误,您还能输入'.session('count').'次');
     	}
 		
 		function GetBrowser()
@@ -93,6 +115,7 @@ class Index extends Controller
 		cookie('user_name', $has['user_name'], 3600);
 		cookie('rec_time', $has['rec_time'], 3600);
 		cookie('rec_address', $has['rec_address'], 3600);
+		session('count', 3);
 		$ip = $this->request->ip();//获取ip地址
 		$time = date("Y-m-d H:i:s");//获取系统时间
 		$browser = GetBrowser();//获取浏览器信息
