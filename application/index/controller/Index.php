@@ -27,7 +27,7 @@ class Index extends Controller
     	}
     	
     	// 验证用户名
-    	$has = db('unuser')->where('user_id', $param['userid'])->find();
+    	$has = db('unuser')->where('user_name', $param['userid'])->find();
     	if(empty($has)){
     		
     		$this->error('用户名不存在');
@@ -111,8 +111,7 @@ class Index extends Controller
 		}
 
     	// 记录用户登录信息
-    	cookie('user_id', $has['user_id'], 3600);  // 一个小时有效期
-		cookie('user_name', $has['user_name'], 3600);
+		cookie('user_name', $has['user_name'], 3600);// 一个小时有效期
 		cookie('rec_time', $has['rec_time'], 3600);
 		cookie('rec_address', $has['rec_address'], 3600);
 		session('count', 3);
@@ -130,7 +129,10 @@ class Index extends Controller
             $this->redirect(url('teacher/index'));
         }
         else{
-            $this->redirect(url('student/index'));
+			$userinfo = db('unuser,unstudent')->where('unuser.user_name' , 'unstudent.stu_rollno')->find();
+			cookie('stu_id', $userinfo['stu_id'], 3600);
+			cookie('stu_name', $userinfo['stu_name'], 3600);
+            $this->redirect(url('student/index/listExam'));
         }
         
     }
