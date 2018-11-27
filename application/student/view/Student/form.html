@@ -6,6 +6,19 @@
                     font-family: myfont;
                     src:url('__ROOT__/static/font/GunfighterAcademy-Regular.ttf');
                 }
+                @font-face
+                {
+                    font-family: myfont1;
+                    src:url('__ROOT__/static/font/GunfighterAcademy-Regular.ttf');
+                }
+        #links:hover
+        {
+            font-style:italic;
+            text-decoration:none;
+            font-family: myfont1;
+            font-size: 11px;
+
+        }
     
     </style>
 <head> 
@@ -40,7 +53,7 @@
                         {volist name="list" id="student"}
                             <tr>
                             <td>{$student.stu_rollno}</td>
-                            <td><a href="http://localhost/tp5/public/student/Person/person?stu_id={$student.stu_id}">{$student.stu_name}</a></td>
+                            <td><a id="links" style="color: black;" href="http://localhost/tp5/public/student/Person/person?stu_id={$student.stu_id}">{$student.stu_name}</a></td>
                             <td>{$student->classes->class_name}</td>
                             <td>{$student->major->major_name}</td>
                             <td>{$student->academy->academy_name}</td>

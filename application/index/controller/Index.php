@@ -138,14 +138,14 @@ class Index extends Controller
 			$userinfo = db('unuser,unteacher')->where('unuser.user_name = unteacher.tea_rollno')->find();
 			cookie('tea_id', $userinfo['tea_id'], 3600);// 一个小时有效期
 			cookie('tea_name', $userinfo['tea_name'], 3600);
-            $this->redirect(url('examOnlineforTeacher/Mark/listMark'));
+            $this->redirect(url('index/teacher'));
         }
         else{
 			$userinfo = db('unuser,unstudent')->where('unuser.user_name = unstudent.stu_rollno')->find();
 			// halt($userinfo);
 			cookie('stu_id', $userinfo['stu_id'], 3600);// 一个小时有效期
 			cookie('stu_name', $userinfo['stu_name'], 3600);
-			$this->redirect(url('examOnlineforStudent/index/listExam'));
+			$this->redirect(url('index/student'));
         }
         
     }
@@ -161,10 +161,10 @@ class Index extends Controller
 
 	public function admin()
     {
-
-
-
-	
+        return $this->fetch();
+	} 
+	public function student()
+    {
         return $this->fetch();
     } 
 
