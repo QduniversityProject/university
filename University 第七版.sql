@@ -212,7 +212,8 @@ user_id int auto_increment,
 user_name varchar(50) NOT NULL,
 user_password varchar(50) NOT NULL,
 user_photo varchar(200),
-user_zhuangtai int,
+user_count int,
+user_status int,
 role_id int NOT NULL,
 rec_time varchar(200),
 time_last_error varchar(200), 
@@ -225,15 +226,15 @@ FOREIGN KEY (role_id) REFERENCES unrole (role_id)
 
 select * from unuser;
 
-insert into unuser values(1,'Leo','123','',0,1,'','','','');
-insert into unuser values(2,'Coulson','123','',0,1,'','','','');
-insert into unuser values(3,'Bill','123','',0,1,'','','','');
+insert into unuser values(1,'Leo','123','',3,0,1,'','','','');
+insert into unuser values(2,'Coulson','123','',3,0,1,'','','','');
+insert into unuser values(3,'Bill','123','',3,0,1,'','','','');
 
-insert into unuser values(4,'1000','123','',0,2,'','','','');
-insert into unuser values(5,'1001','123','',0,2,'','','','');
+insert into unuser values(4,'1000','123','',3,0,2,'','','','');
+insert into unuser values(5,'1001','123','',3,0,2,'','','','');
 
-insert into unuser values(6,'201540704102','123','',0,3,'','','','');
-insert into unuser values(7,'201540704602','123','',0,3,'','','','');
+insert into unuser values(6,'201540704102','123','',3,0,3,'','','','');
+insert into unuser values(7,'201540704602','123','',3,0,3,'','','','');
 select * from unuser;
 
 /*题库类型表*/ /*题库编号(主键) 题库类型*/
@@ -306,9 +307,9 @@ primary key(test_id),
 FOREIGN KEY (course_id) REFERENCES uncourse (course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('1', '考试1', '1','1', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 15：30');
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('2', '考试2', '1', '2', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
-INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('3', '套你猴子', '2','3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 13：30', '2018-11-23 13：30');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('1', '考试1', '1','1', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 14:00:00', '2018-11-23 14:00:00');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('2', '考试2', '1', '2', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 14:00:00', '2018-11-23 14:00:00');
+INSERT INTO `university`.`untest` (`test_id`, `test_desc`,`test_type`, `course_id`, `tea_id`, `single_qus_num`, `multi_qus_num`, `judgment_qus_num`, `blank_qus_num`, `single_score`, `multi_score`, `judgment_score`, `blank_score`, `start_time`, `end_time`) VALUES ('3', '套你猴子', '2','3', '4', '5', '5', '5', '5', '5', '5', '5', '5', '2018-11-23 14:00:00', '2018-11-23 14:00:00');
 
 
 /*试卷表*/ /*试卷编号(主键) 考试学生编号(外键) 抽中单选题所有编号 抽中多选题所有编号 抽中判断题所有编号 抽中填空题所有编号  成绩*/

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新建考试</title>
+	<style>
+		body {
+			color: #333;
+			font: 16px Verdana, "Helvetica Neue", helvetica, Arial, 'Microsoft YaHei', sans-serif;
+			margin: 0px;
+			padding: 20px
+		}
+
+		a {
+			color: #868686;
+			cursor: pointer;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		h2 {
+			color: #4288ce;
+			font-weight: 400;
+			padding: 6px 0;
+			margin: 6px 0 0;
+			font-size: 28px;
+			border-bottom: 1px solid #eee;
+		}
+
+		div {
+			margin: 8px;
+		}
+
+		.info {
+			padding: 12px 0;
+			border-bottom: 1px solid #eee;
+		}
+
+		.copyright {
+			margin-top: 24px;
+			padding: 12px 0;
+			border-top: 1px solid #eee;
+		}
+	</style>
+	<script>
+		var btn = document.getElementById("btn");
+
+		btn.onclick = function () {
+			var width = window.screen.width;
+			var height = window.screen.height;
+			var elem = document.getElementById("div1");
+			requestFullScreen(elem);
+		}
+
+		function requestFullScreen(element) {
+			if (element.requestFullscreen) {
+				element.requestFullscreen();
+			}
+			//FireFox
+			else if (element.mozRequestFullScreen) {
+				element.mozRequestFullScreen();
+			}
+			//Chrome等
+			else if (element.webkitRequestFullScreen) {
+				element.webkitRequestFullScreen();
+			}
+			//IE11
+			else if (element.msRequestFullscreen) {
+				element.msRequestFullscreen();
+			}
+		};
+	</script>
+</head>
+
+<body>
+	<h2>成绩表</h2>
+	<table>
+		<thead>
+			<td>/</td>
+			<td>学号</td>
+			<td>学生姓名</td>
+			<td>专业名称</td>
+			<td>课程名称</td>
+			<td>教师姓名</td>
+			<td>成绩</td>
+		</thead>
+
+		{volist name="markTable" id="mark" }
+		<tr>
+			<td>{$i}</td>
+			<td>{$mark.stu_rollno}</td>
+			<td>{$mark.stu_name}</td>
+			<td>{$mark.major_name}</td>
+			<td>{$mark.course_name}</td>
+			<td>{$mark.tea_name}</td>
+			<td>{$mark.mark}</td>
+		</tr>
+		{/volist}
+	</table>
+	<div class="copyright">
+		<a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a>
+		<span>V5</span>
+		<span>{ 十年磨一剑-为API开发设计的高性能框架 }</span>
+	</div>
+</body>
+
+</html>
