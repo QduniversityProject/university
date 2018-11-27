@@ -8,7 +8,7 @@ class Major
 {
     public function form()
     {
-        $list = MajorModel::all();
+        $list = MajorModel::paginate(5);
         return view('form',['list'=>$list]);
     }
 }

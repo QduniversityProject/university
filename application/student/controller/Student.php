@@ -9,7 +9,7 @@ class Student
 
     public function form()
     {
-        $list = StudentModel::all();
+        $list = StudentModel::paginate(5);
         return view('form',['list'=>$list]);
     }
 

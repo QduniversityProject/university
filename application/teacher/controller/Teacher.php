@@ -8,7 +8,7 @@ class Teacher
 {
     public function form()
     {
-        $list = TeacherModel::all();
+        $list = TeacherModel::paginate(5);
         return view('form',['list'=>$list]);
     }
 }
