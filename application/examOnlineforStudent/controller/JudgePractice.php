@@ -10,11 +10,11 @@ use app\examOnlineforStudent\model\multiAnswer;
 use app\examOnlineforStudent\model\blankAnswer;
 use app\examOnlineforStudent\model\judgmentAnswer;
 
-class JudgeTestGrade extends Controller
+class JudgePractice extends Controller
 {
    
     //提交试卷并批改
-    public function submitTest()
+    public function submitPractice()
 
     {
         $stuid=$_COOKIE['stu_id'];
@@ -152,13 +152,13 @@ class JudgeTestGrade extends Controller
         $mWrong = multiAnswer::all($mids);
         $jWrong = judgmentAnswer::all($jids);
         $bWrong = blankAnswer::all($bids);
-        Db::execute("insert into unmark (stu_id ,test_id,mark) values ('$stuid','$testId','$score')");
+        // Db::execute("insert into unmark (stu_id ,test_id,mark) values ('$stuid','$testId','$score')");
 
         $this->assign('singleresult', $sWrong);
         $this->assign('multiresult', $mWrong);
         $this->assign('judgmentresult', $jWrong);
         $this->assign('blankresult', $bWrong);
-        $this->assign('score', $score);
+        // $this->assign('score', $score);
         return $this->fetch();
 
 

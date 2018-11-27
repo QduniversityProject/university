@@ -10,11 +10,11 @@ use app\examOnlineforStudent\model\multiAnswer;
 use app\examOnlineforStudent\model\blankAnswer;
 use app\examOnlineforStudent\model\judgmentAnswer;
 
-class JudgeTestGrade extends Controller
+class JudgeHomework extends Controller
 {
    
     //提交试卷并批改
-    public function submitTest()
+    public function submitHomework()
 
     {
         $stuid=$_COOKIE['stu_id'];

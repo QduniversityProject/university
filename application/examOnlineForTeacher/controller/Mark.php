@@ -15,7 +15,7 @@ class Mark extends Controller
         ->join('unteacher d',' c.tea_id =d.tea_id')
         ->join('unmajor e','b.major_id =e.major_id')
         ->join('uncourse f','c.course_id =f.course_id')
-        ->paginate(10);
+        ->paginate();
         $this->assign('markTable', $markTable);
         return $this->fetch();
 

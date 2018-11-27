@@ -94,22 +94,22 @@
     };   
    
 
-        setInterval("CountDown()", 1000);
-        var maxtime ="<?php echo strtotime($_GET['end_time'])-strtotime($_GET['start_time']);?>";
-        function CountDown() {
-            if (maxtime >= 0) {
-                minutes = Math.floor(maxtime / 60);
-                seconds = Math.floor(maxtime % 60);
-                msg = "距离结束还有" + minutes + "分" + seconds + "秒";
-                document.getElementById("timer").innerHTML = msg;
-                if (maxtime == 5 * 60) alert("还剩5分钟");
-                --maxtime;
-            } else {
-                clearInterval(timer);
-                alert("时间到，结束!");
-                document.getElementBym("frm").submit();
-            } 
-        }
+        // setInterval("CountDown()", 1000);
+        // var maxtime ="<?php echo strtotime($_GET['end_time'])-strtotime($_GET['start_time']);?>";
+        // function CountDown() {
+        //     if (maxtime >= 0) {
+        //         minutes = Math.floor(maxtime / 60);
+        //         seconds = Math.floor(maxtime % 60);
+        //         msg = "距离结束还有" + minutes + "分" + seconds + "秒";
+        //         document.getElementById("timer").innerHTML = msg;
+        //         if (maxtime == 5 * 60) alert("还剩5分钟");
+        //         --maxtime;
+        //     } else {
+        //         clearInterval(timer);
+        //         alert("时间到，结束!");
+        //         document.getElementBym("frm").submit();
+        //     } 
+        // }
 
     //     function myCheck()
     //   {
@@ -143,7 +143,7 @@
 <body>
     <div id="timer"></div>
     <h2>单选题</h2>
-    <form id="frm"name="form1" method="GET" action="../Judge_test_grade/submitTest" onSubmit="return myCheck()">
+    <form id="frm"name="form1" method="GET" action="../Judge_Homework/submitHomework" onSubmit="return myCheck()">
         {volist name="singleresult" id="single" }
         <div class="info">
             <h5>题目({$i})：{$single.single_title}<br /></h5>

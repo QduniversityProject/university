@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>成绩提交</title>
+	<style>
+		body {
+			color: #333;
+			font: 16px Verdana, "Helvetica Neue", helvetica, Arial, 'Microsoft YaHei', sans-serif;
+			margin: 0px;
+			padding: 20px
+		}
+
+		a {
+			color: #868686;
+			cursor: pointer;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		h2 {
+			color: #4288ce;
+			font-weight: 400;
+			padding: 6px 0;
+			margin: 6px 0 0;
+			font-size: 28px;
+			border-bottom: 1px solid #eee;
+		}
+
+		div {
+			margin: 8px;
+		}
+
+		.info {
+			padding: 12px 0;
+			border-bottom: 1px solid #eee;
+		}
+
+		.copyright {
+			margin-top: 24px;
+			padding: 12px 0;
+			border-top: 1px solid #eee;
+		}
+	</style>
+</head>
+
+<body>
+	<h3>您的成绩：{$score}</h3>
+	<h2>错题表</h2>
+	{volist name="singleresult" id="single" }
+	<div class="info">
+		<h5>题目({$i})：{$single.single_title}<br /></h5>
+		选项：
+		<input type="radio" name="single{$i}" value="A">{$single.single_A}
+		<input type="radio" name="single{$i}" value="B">{$single.single_B}
+		<input type="radio" name="single{$i}" value="C">{$single.single_C}
+		<input type="radio" name="single{$i}" value="D">{$single.single_D}
+	</div>
+	{/volist}
+	<h2>多选题</h2>
+	{volist name="multiresult" id="multi" }
+	<div class="info">
+		<h5>题目({$i})：{$multi.multi_title}<br /></h5>
+		选项：
+		<input type="checkbox" name="multi{$i}[]" value="A">{$multi.multi_A}
+		<input type="checkbox" name="multi{$i}[]" value="B">{$multi.multi_B}
+		<input type="checkbox" name="multi{$i}[]" value="C">{$multi.multi_C}
+		<input type="checkbox" name="multi{$i}[]" value="D">{$multi.multi_D}
+	</div>
+	{/volist}
+	<h2>判断题</h2>
+	{volist name="judgmentresult" id="judgment" }
+	<div class="info">
+		<h5>题目({$i})：{$judgment.judgment_title}<br /></h5>
+	</div>
+	{/volist}
+	<h2>填空题</h2>
+	{volist name="blankresult" id="blank" }
+	<div class="info">
+		<h5>题目({$i})：{$blank.blank_title}<br /></h5>
+	</div>
+	{/volist}
+
+</body>
+
+</html>
