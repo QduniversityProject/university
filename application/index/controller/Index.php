@@ -155,9 +155,24 @@ class Index extends Controller
     	$this->redirect(url('index/login'));
 	}
 
-    public function admin()
+	public function admin()
     {
-        return $this->fetch();
+		$param = input('post.');
+    	if(empty($param['userid'])){
+    		
+    		$this->error('用户名不能为空');
+    	}
+    	
+    	if(empty($param['password'])){
+    		
+    		$this->error('密码不能为空');
+    	}
+		$has = db('unuser')->where('user_name', $param['userid'])->find();
+
+		// $this->assign('has', $$has);
+	dump ($has);
+	
+        // return $this->fetch();
     } 
 
 	

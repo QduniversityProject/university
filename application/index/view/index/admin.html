@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-        <style>
+        <style> 
+
                 @font-face
                 {
                     font-family: myfont;
@@ -107,9 +108,13 @@
             <a class="navbar-brand" href="#">
                 <img class="img-fluid d-block float-left" src="__ROOT__/static/images/logo.png"> 
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <?php
+            echo "您好： " . cookie('user_name') . ', <a href="' . url('index/loginout') . '">退出</a> , 
+            您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');
+           
+            
+                    
+             ?>
         </div>
     </nav>
 
