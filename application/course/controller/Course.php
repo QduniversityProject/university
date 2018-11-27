@@ -8,7 +8,7 @@ class Course
 {
     public function form()
     {
-        $list = CourseModel::all();
+        $list = CourseModel::paginate(5);
         return view('form',['list'=>$list]);
     }
 }
