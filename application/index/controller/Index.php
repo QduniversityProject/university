@@ -165,7 +165,7 @@ class Index extends Controller
     } 
 
 	
-	// public function administrator()
+	// public function \istrator()
     // {
 	// 	echo "您好： " . cookie('user_name') . ', <a href="' . url('index/loginout') . '">退出</a> , 
 	// 	您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');

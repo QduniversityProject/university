@@ -8,8 +8,7 @@ class Academy
 {
     public function form()
     {
-        $list = AcademyModel::all();
+        $list = AcademyModel::paginate(5);
         return view('form',['list'=>$list]);
     } 
-    // nnn
 }
