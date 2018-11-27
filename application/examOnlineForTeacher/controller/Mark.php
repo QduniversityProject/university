@@ -36,14 +36,9 @@ class Mark extends Controller
         ->join('unteacher d',' c.tea_id =d.tea_id')
         ->join('unmajor e','b.major_id =e.major_id')
         ->join('uncourse f','c.course_id =f.course_id')
-<<<<<<< HEAD
         ->where($where)
         ->order("$orderby $orderway")
         ->paginate();
-=======
-        ->paginate()
-        ;
->>>>>>> 9e98d23a3371a05c30d2bee21de9cf581f9a66ab
         $this->assign('markTable', $markTable);
         $this->assign('orderby', $orderby);
         $this->assign('orderway', $orderway);
