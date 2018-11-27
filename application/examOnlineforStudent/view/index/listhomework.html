@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>查看用户列表</title>
+	<style>
+		body {
+			color: #333;
+			font: 16px Verdana, "Helvetica Neue", helvetica, Arial, 'Microsoft YaHei', sans-serif;
+			margin: 0px;
+			padding: 20px
+		}
+
+		a {
+			color: #868686;
+			cursor: pointer;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		h2 {
+			color: #4288ce;
+			font-weight: 400;
+			padding: 6px 0;
+			margin: 6px 0 0;
+			font-size: 28px;
+			border-bottom: 1px solid #eee;
+		}
+
+		div {
+			margin: 8px;
+		}
+
+		.info {
+			padding: 12px 0;
+			border-bottom: 1px solid #eee;
+		}
+
+		.copyright {
+			margin-top: 24px;
+			padding: 12px 0;
+			border-top: 1px solid #eee;
+		}
+	</style>
+	<script>
+		var btn = document.getElementById("btn");
+		
+	   btn.onclick = function() {
+		   var width =  window.screen.width;
+		   var height =   window.screen.height;
+		   var elem = document.getElementById("div1");
+		   requestFullScreen(elem);
+	   }
+		
+	   function requestFullScreen(element) {
+		   if (element.requestFullscreen) {
+			   element.requestFullscreen();
+		   }
+	   //FireFox
+		   else if (element.mozRequestFullScreen) {
+			   element.mozRequestFullScreen();
+		   }
+	   //Chrome等
+		   else if (element.webkitRequestFullScreen) {
+			   element.webkitRequestFullScreen();
+		   }
+	   //IE11
+		   else if (element.msRequestFullscreen) {
+			   element.msRequestFullscreen();
+		   }
+	   };
+	   </script>
+</head>
+
+<body>
+	<h2>习题列表</h2>
+	<div>
+		{volist name="unhomework" id="untest" }
+		<form method="GET" action="../index/startOwnHomework.html">
+			作业名称：{$untest.test_desc}
+			<input type="hidden" name="courseId" value="{$untest.course_id}">
+			<input type="hidden" name="single_qus_num" value="{$untest.single_qus_num}">
+			<input type="hidden" name="multi_qus_num" value="{$untest.multi_qus_num}">
+			<input type="hidden" name="judgment_qus_num" value="{$untest.judgment_qus_num}">
+			<input type="hidden" name="blank_qus_num" value="{$untest.blank_qus_num}">
+			<input type="hidden" name="test_id" value="{$untest.test_id}">
+			<input type="hidden" name="qbank_no" value="{$untest.test_type}">
+			<input type="hidden" name="start_time" value="{$untest.start_time}">
+			<input type="hidden" name="end_time" value="{$untest.end_time}">
+			<input type="submit" value="开始作业">
+		</form>
+		{/volist}
+	</div>
+</body>
+
+</html>
+<!-- onClick="window.open(document.location, 'big', 'fullscreen=yes')" -->
