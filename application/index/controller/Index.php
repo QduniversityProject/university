@@ -135,10 +135,10 @@ class Index extends Controller
             $this->redirect(url('index/admin'));
         }
         else if($has['role_id'] == 2){
-			$userinfo = db('unuser,unteacher')->where('unuser.user_name = unstudent.tea_rollno')->find();
+			$userinfo = db('unuser,unteacher')->where('unuser.user_name = unteacher.tea_rollno')->find();
 			cookie('tea_id', $userinfo['tea_id'], 3600);// 一个小时有效期
 			cookie('tea_name', $userinfo['tea_name'], 3600);
-            $this->redirect(url('teacher/index'));
+            $this->redirect(url('examOnlineforTeacher/Mark/listMark'));
         }
         else{
 			$userinfo = db('unuser,unstudent')->where('unuser.user_name = unstudent.stu_rollno')->find();
