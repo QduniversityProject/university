@@ -110,21 +110,18 @@
             </a>
             <?php
             echo "您好： " . cookie('user_name') . ', <a href="' . url('index/loginout') . '">退出</a> , 
-            您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');
-           
-            
-                    
-             ?>
+ 	您上次登录时间为：'.cookie('rec_time')."您上次登录的地址为： ".cookie('rec_address');
+   ?>
         </div>
     </nav>
 
     <div id="bodys" class="container">
         <div class="row">
             <div class="offset-md-1 col-md-10">
-                    <button class="bt" style="vertical-align:middle" onclick="window.location.href=''"><span>Check Academy</span></button>
-                    <button class="bt" style="vertical-align:middle" onclick="window.location.href=''"><span>Check Major</span></button><br>
-                    <button class="bt" style="vertical-align:middle" onclick="window.location.href=''"><span>Check Teacher</span></button>
-                    <button class="bt" style="vertical-align:middle" onclick="window.location.href=''"><span>Check Student</span></button>
+                    <button class="bt" style="vertical-align:middle" onclick="window.location.href='http://localhost/tp5/public/academy/Academy/form.html'"><span>Check Academy</span></button>
+                    <button class="bt" style="vertical-align:middle" onclick="window.location.href='http://localhost/tp5/public/major/Major/form.html'"><span>Check Major</span></button><br>
+                    <button class="bt" style="vertical-align:middle" onclick="window.location.href='http://localhost/tp5/public/teacher/Teacher/form.html'"><span>Check Teacher</span></button>
+                    <button class="bt" style="vertical-align:middle" onclick="window.location.href='http://localhost/tp5/public/student/Student/form.html'"><span>Check Student</span></button>
             </div>
         </div>
     </div>

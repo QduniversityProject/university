@@ -157,22 +157,11 @@ class Index extends Controller
 
 	public function admin()
     {
-		$param = input('post.');
-    	if(empty($param['userid'])){
-    		
-    		$this->error('用户名不能为空');
-    	}
-    	
-    	if(empty($param['password'])){
-    		
-    		$this->error('密码不能为空');
-    	}
-		$has = db('unuser')->where('user_name', $param['userid'])->find();
 
-		// $this->assign('has', $$has);
-	dump ($has);
+
+
 	
-        // return $this->fetch();
+        return $this->fetch();
     } 
 
 	
