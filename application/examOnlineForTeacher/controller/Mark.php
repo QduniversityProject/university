@@ -8,10 +8,14 @@ class Mark extends Controller
 {
     public function listMark()
     {
-        $markTable=Db::query("
-        select b.stu_rollno ,b.stu_name,e.major_name,f.course_name,d.tea_name,a.mark  from unmark a join unstudent b on a.stu_id=b.stu_id join untest c on a.test_id = c.test_id
-        join unteacher d on c.tea_id =d.tea_id join unmajor e on b.major_id =e.major_id join uncourse f on c.course_id =f.course_id
-        ");
+        $markTable=Db::table('unmark')
+        ->alias('a')
+        ->join('unstudent b','a.stu_id=b.stu_id ')
+        ->join('untest c','a.test_id = c.test_id')
+        ->join('unteacher d',' c.tea_id =d.tea_id')
+        ->join('unmajor e','b.major_id =e.major_id')
+        ->join('uncourse f','c.course_id =f.course_id')
+        ->paginate(10);
         $this->assign('markTable', $markTable);
         return $this->fetch();
 
