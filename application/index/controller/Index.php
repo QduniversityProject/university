@@ -118,10 +118,10 @@ class Index extends Controller
 		return $browser;
 		}
 
-    	// // 记录用户登录信息
-		// cookie('user_name', $has['user_name'], 3600);
-		// cookie('rec_time', $has['rec_time'], 3600);
-		// cookie('rec_address', $has['rec_address'], 3600);
+    	// 记录用户登录信息
+		cookie('user_name', $has['user_name'], 3600);
+		cookie('rec_time', $has['rec_time'], 3600);
+		cookie('rec_address', $has['rec_address'], 3600);
 		//重置账户状态
 		$now['user_status'] = 0;
 		$now['user_count'] = 3;
@@ -135,13 +135,17 @@ class Index extends Controller
             $this->redirect(url('index/admin'));
         }
         else if($has['role_id'] == 2){
+			$userinfo = db('unuser,unteacher')->where('unuser.user_name = unstudent.tea_rollno')->find();
+			cookie('tea_id', $userinfo['tea_id'], 3600);// 一个小时有效期
+			cookie('tea_name', $userinfo['tea_name'], 3600);
             $this->redirect(url('teacher/index'));
         }
         else{
-			$userinfo = db('unuser,unstudent')->where('unuser.user_name' , 'unstudent.stu_rollno')->find();
+			$userinfo = db('unuser,unstudent')->where('unuser.user_name = unstudent.stu_rollno')->find();
+			// halt($userinfo);
 			cookie('stu_id', $userinfo['stu_id'], 3600);// 一个小时有效期
 			cookie('stu_name', $userinfo['stu_name'], 3600);
-            $this->redirect(url('examOnlineforStudent/index/listExam'));
+			$this->redirect(url('examOnlineforStudent/index/listExam'));
         }
         
     }
