@@ -45,6 +45,45 @@
 			border-top: 1px solid #eee;
 		}
 	</style>
+	<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+			$("#major").change(function() {
+                self.location.href="?major_id="+$(this).val();
+            });
+			$("#course").change(function() {
+                self.location.href="?course_id="+$(this).val();
+            });
+			$("#teacher").change(function() {
+                self.location.href="?tea_id="+$(this).val();
+            });
+			$("#student").change(function() {
+                self.location.href="?stu_id="+$(this).val();
+            });
+
+            var currentorderby = "{$orderby}";
+            var currentorderway = "{$orderway}";
+            $("th").click(function() {
+                if ($(this).attr("id")) {
+                    var colid = $(this).attr("id");
+                    if (colid==currentorderby) {
+                        if (currentorderway=="desc") //如果是升序，转为降序
+                            self.location.href = "?orderby="+colid+"&orderway=asc";
+                        else //如果是降序，取消当前排序
+                            self.location.href = "?"
+
+                    }
+                    else 
+                        self.location.href = "?orderby="+colid;
+                }
+            })
+        })
+    </script>
+
 	<script>
 		var btn = document.getElementById("btn");
 
@@ -77,15 +116,40 @@
 
 <body>
 	<h2>成绩表</h2>
+	<select name="major" id="major">
+			{volist name="major" id="m" }   
+			<option value="{$m.major_id}">{$m.major_name}</option>
+			{/volist}   
+	</select>
+
+	<select name="course" id="course">
+			{volist name="course" id="c" }   
+			<option value="{$c.course_id}">{$c.course_name}</option>
+			{/volist}   
+	</select>
+
+	<select name="teacher" id="teacher">
+			{volist name="teacher" id="t" }   
+			<option value="{$t.tea_id}">{$t.tea_name}</option>
+			{/volist}   
+	</select>
+
+	<select name="student" id="student">
+			{volist name="student" id="s" }   
+			<option value="{$s.stu_id}">{$s.stu_name}</option>
+			{/volist}   
+	</select>
 	<table>
 		<thead>
-			<td>/</td>
-			<td>学号</td>
-			<td>学生姓名</td>
-			<td>专业名称</td>
-			<td>课程名称</td>
-			<td>教师姓名</td>
-			<td>成绩</td>
+			<tr>
+				<th>/</th>
+				<th id="stu_rollno">学号</th>
+				<th id="stu_name">学生姓名</th>
+				<th id="major_name">专业名称</th>
+				<th id="course_name">课程名称</th>
+				<th id="tea_name">教师姓名</th>
+				<th id="mark">成绩</th>
+			</tr>
 		</thead>
 
 		{volist name="markTable" id="mark" }
@@ -96,7 +160,9 @@
 			<td>{$mark.major_name}</td>
 			<td>{$mark.course_name}</td>
 			<td>{$mark.tea_name}</td>
-			<td>{$mark.mark}</td>
+			<td class="{if $mark.mark >= 75}table-success 
+                    {elseif $mark.mark < 75 && $mark.mark >= 60}table-warning
+                    {else}table-danger{/if}">{$mark.mark}</td>
 		</tr>
 		{/volist}
 	</table>
