@@ -166,7 +166,11 @@ class Index extends Controller
 	public function student()
     {
         return $this->fetch();
-    } 
+	} 
+	public function teacher()
+	{
+		return $this->fetch();
+	}
 
 
 }
