@@ -76,30 +76,42 @@
 </head>
 
 <body>
-	<h2>成绩表</h2>
-	<table>
-		<thead>
-			<td>/</td>
-			<td>学号</td>
-			<td>学生姓名</td>
-			<td>专业名称</td>
-			<td>课程名称</td>
-			<td>教师姓名</td>
-			<td>成绩</td>
-		</thead>
+	<input type="text" name="test_desc">
+	<select>
+		<option value ="volvo">Volvo</option>
+		<option value ="saab">Saab</option>
+		<option value="opel">Opel</option>
+		<option value="audi">Audi</option>
+	  </select>
+	  <select>
+		<option value ="volvo">Volvo</option>
+		<option value ="saab">Saab</option>
+		<option value="opel">Opel</option>
+		<option value="audi">Audi</option>
+	  </select>
+	  <input type="number" name="single_qus_num">
+	  <input type="number" name="multi_qus_num">
+	  <input type="number" name="judgment_qus_num">
+	  <input type="number" name="blank_qus_num">
 
-		{volist name="markTable" id="mark" }
-		<tr>
-			<td>{$i}</td>
-			<td>{$mark.stu_rollno}</td>
-			<td>{$mark.stu_name}</td>
-			<td>{$mark.major_name}</td>
-			<td>{$mark.course_name}</td>
-			<td>{$mark.tea_name}</td>
-			<td>{$mark.mark}</td>
-		</tr>
-		{/volist}
-	</table>
+	  <input type="number" name="single_score">
+	  <input type="number" name="multi_score">
+	  <input type="number" name="judgment_score">
+	  <input type="number" name="blank_score">
+	  
+	  <input type="date" name="start_date" >
+	  <input type="time" name="start_time" >
+	  <input type="date" name="start_date" >
+	  <input type="time" name="end_time" >
+	  
+
+
+
+
+
+
+	  
+
 	<div class="copyright">
 		<a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a>
 		<span>V5</span>
