@@ -43,32 +43,35 @@
 		
 	</style>
 	<script>
-		var btn = document.getElementById("btn");
+	// 	var btn = document.getElementById("btn");
 		
-	   btn.onclick = function() {
-		   var width =  window.screen.width;
-		   var height =   window.screen.height;
-		   var elem = document.getElementById("div1");
-		   requestFullScreen(elem);
-	   }
+	//    btn.onclick = function() {
+	// 	   var width =  window.screen.width;
+	// 	   var height =   window.screen.height;
+	// 	   var elem = document.getElementById("div1");
+	// 	   requestFullScreen(elem);
+	//    }
 		
-	   function requestFullScreen(element) {
-		   if (element.requestFullscreen) {
-			   element.requestFullscreen();
-		   }
-	   //FireFox
-		   else if (element.mozRequestFullScreen) {
-			   element.mozRequestFullScreen();
-		   }
-	   //Chrome等
-		   else if (element.webkitRequestFullScreen) {
-			   element.webkitRequestFullScreen();
-		   }
-	   //IE11
-		   else if (element.msRequestFullscreen) {
-			   element.msRequestFullscreen();
-		   }
-	   };
+	//    function requestFullScreen(element) {
+	// 	   if (element.requestFullscreen) {
+	// 		   element.requestFullscreen();
+	// 	   }
+	//    //FireFox
+	// 	   else if (element.mozRequestFullScreen) {
+	// 		   element.mozRequestFullScreen();
+	// 	   }
+	//    //Chrome等
+	// 	   else if (element.webkitRequestFullScreen) {
+	// 		   element.webkitRequestFullScreen();
+	// 	   }
+	//    //IE11
+	// 	   else if (element.msRequestFullscreen) {
+	// 		   element.msRequestFullscreen();
+	// 	   }
+	//    };
+
+	
+	   document.getElementById("btn").setAttribute("disabled", true);
 	   </script>
 </head>
 
@@ -100,6 +103,7 @@
 			<input class="times" type="text" disabled="disabled"  name="end_time" value="{$untest.end_time}"><span style="font-family:myfont;font-size: 25px;margin-left: -2.5%">|</span>
 
 			<input id="btn" type="submit" value="GO">
+			<!-- <?php if($curTime>$untest['start_time'] and $curTime < $untest['end_time'] ) echo false ; else echo 'true'  ?> -->
 		</form>
 		{/volist}
 		    </div>
