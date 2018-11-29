@@ -20,6 +20,7 @@ class Mark extends Controller
         ->join('unteacher d', ' c.tea_id =d.tea_id')
         ->join('unmajor e', 'b.major_id =e.major_id')
         ->join('uncourse f', 'c.course_id =f.course_id')
+        ->join('unqbank_type g', 'c.test_type =g.qbank_no')
         ->select();
     
         $path = dirname(__FILE__); //找到当前脚本所在路径
@@ -28,19 +29,23 @@ class Mark extends Controller
         $PHPSheet = $PHPExcel->getActiveSheet();
         $PHPSheet->setTitle("demo"); //给当前活动sheet设置名称
         $PHPSheet->setCellValue("A1", "学生学号")
-            ->setCellValue("B1", "教师名称")
-            ->setCellValue("C1", "学生姓名")
+            ->setCellValue("B1", "学生姓名")
+            ->setCellValue("C1", "教师姓名")
             ->setCellValue("D1", "专业名称")
             ->setCellValue("E1", "课程名称")
-            ->setCellValue("F1", "成绩");
+            ->setCellValue("F1", "测试名称")
+            ->setCellValue("G1", "成绩")
+            ->setCellValue("H1", "类型");
         $i = 2;
         foreach ($markTable as $data) {
             $PHPSheet->setCellValue("A" . $i, $data['stu_rollno'])
                 ->setCellValue("B" . $i, $data['stu_name'])
-                ->setCellValue("C" . $i, $data['major_name'])
-                ->setCellValue("D" . $i, $data['course_name'])
-                ->setCellValue("E" . $i, $data['tea_name'])
-                ->setCellValue("F" . $i, $data['mark'])
+                ->setCellValue("C" . $i, $data['tea_name'])
+                ->setCellValue("D" . $i, $data['major_name'])
+                ->setCellValue("E" . $i, $data['course_name'])
+                ->setCellValue("F" . $i, $data['test_desc'])
+                ->setCellValue("G" . $i, $data['mark'])
+                ->setCellValue("H" . $i, $data['qbank_type'])
                 ;
             $i++;
         }
@@ -84,6 +89,7 @@ class Mark extends Controller
             ->join('unteacher d', ' c.tea_id =d.tea_id')
             ->join('unmajor e', 'b.major_id =e.major_id')
             ->join('uncourse f', 'c.course_id =f.course_id')
+            ->join('unqbank_type g', 'c.test_type =g.qbank_no')
             ->where($where)
             ->order("$orderby $orderway")
             ->paginate();
