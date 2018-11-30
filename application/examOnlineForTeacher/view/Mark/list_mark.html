@@ -126,7 +126,7 @@
 
 <body>
 		{include file="Mark/heads"/}
-		<div class="container" style=" height:452px;">
+		<div class="container" style="margin-bottom:1%;">
 				<div class="row">
 					<div class="offset-md-1 col-md-10">
 							
@@ -176,7 +176,7 @@
 
 		{volist name="markTable" id="mark" }
 		<tr>
-			<td>{$i}</td>
+			<td><?php echo ( $_GET['page']?($_GET['page']*10-10+$i):$i  );?></td>
 			<td>{$mark.stu_rollno}</td>
 			<td>{$mark.stu_name}</td>
 			<td>{$mark.major_name}</td>

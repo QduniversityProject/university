@@ -165,7 +165,7 @@ EOD;
             ->join('unqbank_type g', 'c.test_type =g.qbank_no')
             ->where($where)
             ->order("$orderby $orderway")
-            ->paginate();
+            ->paginate(10);
         $this->assign('markTable', $markTable);
         $this->assign('orderby', $orderby);
         $this->assign('orderway', $orderway);
