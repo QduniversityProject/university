@@ -3,8 +3,8 @@
  * 生成pdf
  * @param  string $html      需要生成的内容
  */
-function pdf($html=array(),$title="标题",$fileName=""){
-	$fileName = time();
+function pdf($html=array(),$title="标题",$fileName="GradeTablePDF"){
+	
     vendor('tecnickcom.tcpdf.tcpdf'); //导入TCPDF类
     $pdf = new \Tcpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     // 设置打印模式
