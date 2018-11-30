@@ -11,6 +11,11 @@ class CreateTest extends Controller
         return $this->fetch();
 
     }
+
+    public function insertTest()
+    {
+        
+    }
 }
 
 //gggggoddddd

@@ -29,7 +29,7 @@
 		{
 			font-style: italic;
 		}
-			#student,#major,#course,#teacher
+			#student,#major,#course,#teacher,#excel,#pdf
 			{
 				
 				margin-bottom: 3%;
@@ -155,6 +155,8 @@
 			<option value="{$t.tea_id}">{$t.tea_name}</option>
 			{/volist}   
 	</select>
+	<a href="http://localhost:8888/tp5/public/examOnlineForteacher/mark/excelPrint"><button id="excel">打印Excel</button></a>
+	<a href="http://localhost:8888/tp5/public/examOnlineForteacher/mark/pdf"><button id="pdf">打印PDF</button></a>
 
 	
 	<table class="table table-striped table-hover">
