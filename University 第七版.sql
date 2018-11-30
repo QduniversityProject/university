@@ -153,8 +153,10 @@ class_id int NOT NULL,
 stu_birth date,
 stu_address varchar(200),
 academy_id int NOT NULL,
-major_id varchar(50) NOT NULL
-
+major_id int NOT NULL,
+primary key(stu_id),
+FOREIGN KEY (academy_id) REFERENCES unacademy (academy_id),
+FOREIGN KEY (major_id) REFERENCES unmajor (major_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 select * from unstudent;
