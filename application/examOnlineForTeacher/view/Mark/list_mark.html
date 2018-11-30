@@ -174,7 +174,7 @@
 
 		{volist name="markTable" id="mark" }
 		<tr>
-			<td>{$i}</td>
+			<td><?php echo ( $_GET['page']?($_GET['page']*10-10+$i):$i  );?></td>
 			<td>{$mark.stu_rollno}</td>
 			<td>{$mark.stu_name}</td>
 			<td>{$mark.major_name}</td>
