@@ -159,7 +159,9 @@
 				<th id="major_name">专业名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
 				<th id="course_name">课程名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
 				<th id="tea_name">教师姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+				<th id="mark">测试名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
 				<th id="mark">成绩<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+				<th id="type">类型<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
 			</tr>
 		</thead>
 
@@ -171,9 +173,11 @@
 			<td>{$mark.major_name}</td>
 			<td>{$mark.course_name}</td>
 			<td>{$mark.tea_name}</td>
+			<td>{$mark.test_desc}</td>
 			<td class="{if $mark.mark >= 75}table-success 
                     {elseif $mark.mark < 75 && $mark.mark >= 60}table-warning
-                    {else}table-danger{/if}">{$mark.mark}</td>
+					{else}table-danger{/if}">{$mark.mark}</td>
+					<td>{$mark.qbank_type}</td>
 		</tr>
 		{/volist}
 	</table>

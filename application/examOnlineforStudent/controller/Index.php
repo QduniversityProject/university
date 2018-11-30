@@ -25,10 +25,9 @@ class Index extends Controller
         $course_id = $course_id[0];
         $c = implode(',', $course_id);
         $untest = Db::query("select * from untest where course_id in ($c) and test_type=1");
-    
-       
+        $curTime= date('Y-m-d h:i:s', time());
         $this->assign('untest', $untest);
-    
+        $this->assign('curTime', $curTime);
         return $this->fetch();
     }
     public function listhomework(){
