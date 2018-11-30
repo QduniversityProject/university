@@ -2,13 +2,86 @@
 namespace app\examOnlineForTeacher\controller;
 
 use think\Controller;
+use think\request;
 use think\Db;
 use PHPExcel_IOFactory;
 use PHPExcel;
 
-
 class Mark extends Controller
 {
+    // require_once(APPPATH . '/tecnickcom/tcppdf/config/pdf_config.php');
+    // $this->load->library('/tcpdf/tcpdf');
+
+
+    public function Pdf(){
+       
+
+// $pdf->writeHTML($html, true, 0, true, 0);
+
+// $pdf->writeHTML($html);
+
+// pdf($html);die;
+
+        // 如果是把数据库数据转PDF格式执行以下代码
+        // 数据格式只能是字符串
+        // $markTable = Db::table('unmark')
+        // ->alias('a')
+        // ->join('unstudent b', 'a.stu_id=b.stu_id ')
+        // ->join('untest c', 'a.test_id = c.test_id')
+        // ->join('unteacher d', ' c.tea_id =d.tea_id')
+        // ->join('unmajor e', 'b.major_id =e.major_id')
+        // ->join('uncourse f', 'c.course_id =f.course_id')
+        // ->join('unqbank_type g', 'c.test_type =g.qbank_no')
+        // ->select();
+        // foreach ($markTable as $data) {
+        //     $PHPSheet->setCellValue("A" . $i, $data['stu_rollno'])
+        //         ->setCellValue("B" . $i, $data['stu_name'])
+        //         ->setCellValue("C" . $i, $data['tea_name'])
+        //         ->setCellValue("D" . $i, $data['major_name'])
+        //         ->setCellValue("E" . $i, $data['course_name'])
+        //         ->setCellValue("F" . $i, $data['test_desc'])
+        //         ->setCellValue("G" . $i, $data['mark'])
+        //         ->setCellValue("H" . $i, $data['qbank_type'])
+        //         ;
+        //  }
+
+
+    //      <table class="table table-striped table-hover">
+	// 	<thead>
+	// 		<tr>
+	// 			<th>\</th>
+	// 			<th id="stu_rollno">学号<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="stu_name">学生姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="major_name">专业名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="course_name">课程名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="tea_name">教师姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="mark">测试名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="mark">成绩<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 			<th id="type">类型<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+	// 		</tr>
+	// 	</thead>
+
+	// 	{volist name="markTable" id="mark" }
+	// 	<tr>
+	// 		<td>6666</td>
+	// 	</tr>
+	// 	{/volist}
+	// </table>
+$html = <<<EOD
+<h1>该功能正在维护--敬请期待</h1>
+
+EOD;
+
+    pdf($html);die;
+     
+        // //如果是把HTML页面转PDF格式执行以下代码
+        //   $html = "http://localhost:8888/tp5/public/examOnlineForteacher/mark/listmark";
+        //   $data = file($html);//获取html页面的url
+        //   pdf($data);die;
+       
+       }
+
+
    
     public function excelPrint()
     {
