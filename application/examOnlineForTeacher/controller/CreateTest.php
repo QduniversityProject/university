@@ -37,7 +37,7 @@ class CreateTest extends Controller
         $start_time=$_GET['start_date']." ".$_GET['start_time'];
         $end_time=$_GET['end_date']." ".$_GET['end_time'];
         $testInsert=Db::execute("INSERT INTO untest (test_desc, test_type, course_id, tea_id, single_qus_num, multi_qus_num, judgment_qus_num, blank_qus_num, single_score, multi_score, judgment_score, blank_score, start_time, end_time) 
-        VALUES ( $tset_desc,$test_type, $course_id, $tea_id,$single_qus_num, $multi_qus_num,   $judgment_qus_num, $blank_qus_num, $single_score, 
+        VALUES ( '$tset_desc',$test_type, $course_id, $tea_id,$single_qus_num, $multi_qus_num,   $judgment_qus_num, $blank_qus_num, $single_score, 
         $multi_score, $judgment_score, $blank_score, '$start_time',  '$end_time');");
         if($testInsert){
             return "添加成功";

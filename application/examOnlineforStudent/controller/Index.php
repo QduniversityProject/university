@@ -24,7 +24,7 @@ class Index extends Controller
         $course_id = Db::query("select course_ids from unmajor a join unstudent b on a.major_id= b.major_id where b.stu_id =:id", ['id' => $stuid]);
         $course_id = $course_id[0];
         $c = implode(',', $course_id);
-        $untest = Db::query("select * from untest where course_id in ($c) and test_type=1");
+        $untest = Db::query("select * from untest where course_id in ($c) and test_type=2");
         $curTime= date('Y-m-d h:i:s', time());
         $this->assign('untest', $untest);
         $this->assign('curTime', $curTime);
@@ -46,7 +46,7 @@ class Index extends Controller
         $course_id = Db::query("select course_ids from unmajor a join unstudent b on a.major_id= b.major_id where b.stu_id =:id", ['id' => $stuid]);
         $course_id = $course_id[0];
         $c = implode(',', $course_id);
-        $unlianxi = Db::query("select * from untest where course_id in ($c) and test_type=2");       
+        $unlianxi = Db::query("select * from untest where course_id in ($c) and test_type=1");       
         $this->assign('unlianxi', $unlianxi);
         return $this->fetch();
     }
