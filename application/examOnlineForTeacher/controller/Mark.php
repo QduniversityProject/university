@@ -138,11 +138,12 @@ EOD;
         $major = Db::table('unmajor')->select();
         $teacher = Db::table('unteacher')->select();
         $student = Db::table('unstudent')->select();
-
+        $this->assign('major_id', $major_id);
         $where = array();
         if ($major_id) {
             //$where['major_id'] = array('eq', $major_id); 
             $where['e.major_id'] = $major_id;
+        
         }
         if ($course_id) {
             $where['f.course_id'] = $course_id;

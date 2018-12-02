@@ -59,18 +59,82 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
+		function getUrl(){
+            //匹配url中以?或&连接的字符，拆成数组
+            var url = document.URL.match(/[?&][^?&]+=[^?&]+/g);
+            if (url===null) {
+                return '';
+            }else{
+                for (var i = 0; i<url.length; i++) {
+                    url[i]=url[i].slice(1);
+                }
+            }
+            return url;
+		}
+		
+		function filter(name,val){
+            var getString=getUrl()
+            var oldUrl=document.URL;
+            var newUrl;
+            if (getString.length>0) {
+                var repeat=true;
+                for (var i = 0; i < getString.length; i++) {
+                    if (getString[i].indexOf(name)>=0) {
+                        repeat=false;
+                        newUrl=oldUrl.replace(getString[i],name+'='+val)
+                    }
+                }
+                if(repeat){
+                    newUrl=oldUrl+'&'+name+'='+val
+                }
+            }else{
+                newUrl=oldUrl+'?'+name+'='+val;
+            }
+            window.location=newUrl
+        }
+
         $(document).ready(function() {
+			// $("#major option[value='3']").setAttribute("selected", "selected");
 			$("#major").change(function() {
-                self.location.href="?major_id="+$(this).val();
+				if($(this).val() == "0"){
+					// var url = self.location.href;
+					// var parastart = url.indexOf("major_id");
+					// var nowpara = url.substr(parastart, 10);
+					// self.location.href = url.replace(nowpara, "");
+					self.location.href = "?";
+				}
+				else{
+					filter("major_id",$(this).val());
+					// $("option").setAttribute("selected", "selected");
+					$(this).val("3");
+				}
             });
 			$("#course").change(function() {
-                self.location.href="?course_id="+$(this).val();
+                if($(this).val() == "0"){
+					self.location.href = "?";
+				}
+				else{
+					filter("course_id",$(this).val());
+					$(this).val("3");
+				}
             });
 			$("#teacher").change(function() {
-                self.location.href="?tea_id="+$(this).val();
+                if($(this).val() == "0"){
+					self.location.href = "?";
+				}
+				else{
+					filter("tea_id",$(this).val());
+					$(this).val("3");
+				}
             });
 			$("#student").change(function() {
-                self.location.href="?stu_id="+$(this).val();
+                if($(this).val() == "0"){
+					self.location.href = "?";
+				}
+				else{
+					filter("course_id",$(this).val());
+					$(this).val("3");
+				}
             });
 
             var currentorderby = "{$orderby}";
@@ -79,14 +143,36 @@
                 if ($(this).attr("id")) {
                     var colid = $(this).attr("id");
                     if (colid==currentorderby) {
-                        if (currentorderway=="desc") //如果是升序，转为降序
-                            self.location.href = "?orderby="+colid+"&orderway=asc";
-                        else //如果是降序，取消当前排序
-                            self.location.href = "?"
+                        if (currentorderway=="desc") {   //如果是降序，转为升序
+							filter("orderby",colid);
+							filter("orderway","asc");
+						}
+						else {   //如果是升序，取消当前排序
+							var url = self.location.href;
+							var paraend = url.indexOf("asc");
+							var parastart = url.indexOf("orderby");
+							var paralength = paraend - parastart + 3;
+							// var info = "ks"+parastart+"js"+paraend+"cd"+paralength;
+							// alert(info);
+							var nowpara = url.substr(parastart, paralength);
+							// alert(nowpara);
+							// if (self.location.search.indexOf("orderby") == 1){
+							// 	newurl = url.replace(nowpara, "");
+							// 	newurl = newurl.replace("?", "");
+							// 	self.location.href = newurl;
+							// }
+							// else{
+							newurl = url.replace(nowpara, "");
+							var lastchar = newurl.substr(newurl.length-1,1); //url最后一个字符
+							if (lastchar == "?" || lastchar == "&"){
+								newurl = newurl.replace(lastchar, "");
+							}
+							self.location.href = newurl;
+						}
 
                     }
                     else 
-                        self.location.href = "?orderby="+colid;
+						filter("orderby",colid);
                 }
             })
         })
@@ -131,24 +217,28 @@
 	<h1 style="font-family:myfont;font-size: 50px">Grades Information</h1>
 
 	<select name="student" id="student">
+			<option value="0">请选择学生</option>
 			{volist name="student" id="s" }   
 			<option value="{$s.stu_id}">{$s.stu_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="major" id="major" >
+			<option value="0">请选择专业</option>
 			{volist name="major" id="m" }   
 			<option value="{$m.major_id}">{$m.major_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="course" id="course">
+			<option value="0">请选择课程</option>
 			{volist name="course" id="c" }   
 			<option value="{$c.course_id}">{$c.course_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="teacher" id="teacher">
+			<option value="0">请选择教师</option>
 			{volist name="teacher" id="t" }   
 			<option value="{$t.tea_id}">{$t.tea_name}</option>
 			{/volist}   
@@ -161,14 +251,14 @@
 		<thead>
 			<tr>
 				<th>\</th>
-				<th id="stu_rollno">学号<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="stu_name">学生姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="major_name">专业名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="course_name">课程名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="tea_name">教师姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="mark">测试名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="mark">成绩<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="type">类型<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
+				<th id="stu_rollno">学号<i class="fa fa-fw {if $orderby == 'stu_rollno'}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="stu_name">学生姓名<i class="fa fa-fw {if $orderby == 'stu_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="major_name">专业名称<i class="fa fa-fw {if $orderby == 'major_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="course_name">课程名称<i class="fa fa-fw {if $orderby == 'course_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="tea_name">教师姓名<i class="fa fa-fw {if $orderby == 'tea_name}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="mark">测试名称</th>
+				<th id="mark">成绩<i class="fa fa-fw {if $orderby == 'mark'}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="type">类型</th>
 			</tr>
 		</thead>
 

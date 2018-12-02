@@ -40,7 +40,7 @@ class Index extends Controller
 		//验证帐号状态
 		if($has['user_status'] == 1){
 			$etime = ceil(30-((time() - $has['time_last_error'])/60));
-			if((time() - $has['time_last_error']) > 10){
+			if((time() - $has['time_last_error']) > 1800){
 				$now['user_status'] = 0;  //若超过锁定时间，帐号恢复正常  （status-0)
 				Db::table('unuser')->where('user_id', $has['user_id'])->update($now);
 			}
