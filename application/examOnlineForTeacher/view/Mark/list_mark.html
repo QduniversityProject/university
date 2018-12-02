@@ -148,13 +148,11 @@
 							filter("orderway","asc");
 						}
 						else {   //如果是升序，取消当前排序
-							var url = self.location.href;
-							var paraend = url.indexOf("asc");
-							var parastart = url.indexOf("orderby");
-							var paralength = paraend - parastart + 3;
-							// var info = "ks"+parastart+"js"+paraend+"cd"+paralength;
-							// alert(info);
-							var nowpara = url.substr(parastart, paralength);
+							var url1 = self.location.href;
+							var paraend1 = url1.indexOf("asc");
+							var parastart1 = url1.indexOf("orderway");
+							var paralength1 = paraend1 - parastart1 + 3;
+							var nowpara1 = url1.substr(parastart1, paralength1);
 							// alert(nowpara);
 							// if (self.location.search.indexOf("orderby") == 1){
 							// 	newurl = url.replace(nowpara, "");
@@ -162,12 +160,25 @@
 							// 	self.location.href = newurl;
 							// }
 							// else{
-							newurl = url.replace(nowpara, "");
-							var lastchar = newurl.substr(newurl.length-1,1); //url最后一个字符
-							if (lastchar == "?" || lastchar == "&"){
-								newurl = newurl.replace(lastchar, "");
+							newurl1 = url1.replace(nowpara1, "");
+
+							var url2 = self.location.href;
+							var parastart2 = url2.indexOf("orderby");
+							var paraend2 = url2.indexOf("&",parastart2);
+							if (paraend2 == -1){
+								var nowpara2 = url1.substr(parastart2);
 							}
-							self.location.href = newurl;
+							else{
+								var paralength2 = paraend2;
+								var nowpara2 = url1.substr(parastart2,paralength2);
+							}
+							newurl2 = url2.replace(nowpara2, "");
+
+							var lastchar = newurl2.substr(newurl2.length-1,1); //url最后一个字符
+							if (lastchar == "?" || lastchar == "&"){
+								newurl2 = newurl2.replace(lastchar, "");
+							}
+							self.location.href = newurl2;
 						}
 
                     }
@@ -255,7 +266,7 @@
 				<th id="stu_name">学生姓名<i class="fa fa-fw {if $orderby == 'stu_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="major_name">专业名称<i class="fa fa-fw {if $orderby == 'major_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="course_name">课程名称<i class="fa fa-fw {if $orderby == 'course_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
-				<th id="tea_name">教师姓名<i class="fa fa-fw {if $orderby == 'tea_name}fa-sort-amount-{$orderway}{/if}"></i></th>
+				<th id="tea_name">教师姓名<i class="fa fa-fw {if $orderby == 'tea_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="mark">测试名称</th>
 				<th id="mark">成绩<i class="fa fa-fw {if $orderby == 'mark'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="type">类型</th>
@@ -263,7 +274,7 @@
 		</thead>
 
 		{volist name="markTable" id="mark" }
-		<tr>
+		<tr {if $_GET['page'] eq 1 && $i<=3} class="text-danger"{/if}>
 			<td><?php echo ( $_GET['page']?($_GET['page']*10-10+$i):$i  );?></td>
 			<td>{$mark.stu_rollno}</td>
 			<td>{$mark.stu_name}</td>
