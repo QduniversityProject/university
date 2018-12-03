@@ -41,6 +41,7 @@ class Analysis extends Controller
         // ->group("b.class_id")
         // ->select();
         
+        // halt(json_encode($amgrade));
         foreach ($amgrade as $key => $val){
             $avg[$key] = $val['avg'];
             $max[$key] = $val['max'];
@@ -102,7 +103,13 @@ class Analysis extends Controller
         ->where($where)
         ->where('a.mark', '>=', '85')
         ->count();
-        // halt($ccgrade1);
+
+        $total = $ccgrade1 + $ccgrade2 + $ccgrade3 + $ccgrade4;
+        $grade1 = $ccgrade1*100/$total;
+        $grade2 = $ccgrade2*100/$total;
+        $grade3 = $ccgrade3*100/$total;
+        $grade4 = $ccgrade4*100/$total;
+        // halt($grade4);
 
         $stugrade = Db::table('unmark')
         ->alias('a')
@@ -123,10 +130,10 @@ class Analysis extends Controller
         $this->assign('student', $student);
         $this->assign('avg', $avg);
         $this->assign('max', $max);
-        $this->assign('ccgrade1', $ccgrade1);
-        $this->assign('ccgrade2', $ccgrade2);
-        $this->assign('ccgrade3', $ccgrade3);
-        $this->assign('ccgrade4', $ccgrade4);
+        $this->assign('grade1', $grade1);
+        $this->assign('grade2', $grade2);
+        $this->assign('grade3', $grade3);
+        $this->assign('grade4', $grade4);
         $this->assign('stugrade', $stugrade);
         return $this->fetch();
     }

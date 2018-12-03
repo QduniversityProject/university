@@ -2,16 +2,16 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="styles/kendo.default.min.css" />
-    <link rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
+    <link rel="stylesheet" href="/tp5/public/static/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="/tp5/public/static/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="/tp5/public/static/styles/kendo.default.mobile.min.css" />
 
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/kendo.all.min.js"></script>
+    <script src="/tp5/public/static/js/jquery.min.js"></script>
+    <script src="/tp5/public/static/js/kendo.all.min.js"></script>
     
 
 </head>
@@ -36,6 +36,7 @@
         <div id="pie"></div>
     </div>
 
+    <h1>查看指定学生成绩</h1>
     <select name="student" id="student">
         <option value="0">请选择学生</option>
         {volist name="student" id="s" }   
@@ -82,22 +83,18 @@
                 },
                 series: [{
                         name: "平均分",
-                        data: [20,25,30]
+                        data: [78,80,70,70,60,68,0,88,0,75]
                     }, {
                         name: "最高分",
-                        data: [10, 15, 20]
+                        data: [90, 93, 80, 88, 87, 92, 0, 96, 0, 99]
                 }],
                 categoryAxis: {
-                    categories: ["经济学院1班", "经济学院2班", "国防学院1班"]
+                    categories: ["经济学院1班", "经济学院2班", "国防学院1班", "国防学院2班", "软件技术学院1班", "软件技术学院2班", "体育学院1班", "体育学院2班", "艺术学院1班","艺术学院2班"]
                 },
                
             });
 
-            var total = {$ccgrade1}+{$ccgrade2}+{$ccgrade3}+{$ccgrade4};
-            var grade1 = {$ccgrade1}/total;
-            var grade2 = {$ccgrade2}/total;
-            var grade3 = {$ccgrade3}/total;
-            var grade4 = {$ccgrade4}/total;
+
 
             $("#pie").kendoChart({
                 title: {
@@ -122,19 +119,19 @@
                     startAngle: 150,
                     data: [{
                         category: "差",
-                        value: grade1,
+                        value: {$grade1},
                         color: "#9de219"
                     },{
                         category: "一般",
-                        value: grade2,
+                        value: {$grade2},
                         color: "#90cc38"
                     },{
                         category: "良好",
-                        value: grade3,
+                        value: {$grade3},
                         color: "#068c35"
                     },{
                         category: "优秀",
-                        value: grade4,
+                        value: {$grade4},
                         color: "#006634"
                     }]
                 }],
