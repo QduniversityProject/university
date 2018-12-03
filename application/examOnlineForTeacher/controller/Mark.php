@@ -132,31 +132,12 @@ EOD;
 
 
     
-<<<<<<< HEAD
-    public function listMark($orderby = 'mark', $orderway = 'desc', $major_id = '', $course_id = '', $tea_id = '', $stu_id = '')
-=======
     public function listMark($orderby = 'mark', $orderway = 'desc', $major_id = '0', $course_id = '0', $tea_id = '0', $stu_id = '0')
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
     {
         $course = Db::table('uncourse')->select();
         $major = Db::table('unmajor')->select();
         $teacher = Db::table('unteacher')->select();
         $student = Db::table('unstudent')->select();
-<<<<<<< HEAD
-
-        $where = array();
-        if ($major_id) {
-            //$where['major_id'] = array('eq', $major_id); 
-            $where['e.major_id'] = $major_id;
-        }
-        if ($course_id) {
-            $where['f.course_id'] = $course_id;
-        }
-        if ($tea_id) {
-            $where['d.tea_id'] = $tea_id;
-        }
-        if ($stu_id) {
-=======
         $this->assign('major_id', $major_id);
         $this->assign('course_id', $course_id);
         $this->assign('tea_id', $tea_id);
@@ -174,7 +155,6 @@ EOD;
             $where['d.tea_id'] = $tea_id;
         }
         if ($stu_id !== '0') {
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
             $where['b.stu_id'] = $stu_id;
         }
 

@@ -59,20 +59,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.js" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-<<<<<<< HEAD
-        $(document).ready(function() {
-			$("#major").change(function() {
-                self.location.href="?major_id="+$(this).val();
-            });
-			$("#course").change(function() {
-                self.location.href="?course_id="+$(this).val();
-            });
-			$("#teacher").change(function() {
-                self.location.href="?tea_id="+$(this).val();
-            });
-			$("#student").change(function() {
-                self.location.href="?stu_id="+$(this).val();
-=======
 		function getUrl(){
             //匹配url中以?或&连接的字符，拆成数组
             var url = document.URL.match(/[?&][^?&]+=[^?&]+/g);
@@ -149,7 +135,6 @@
 				else{
 					filter("stu_id",$(this).val());
 				}
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
             });
 
             var currentorderby = "{$orderby}";
@@ -158,16 +143,6 @@
                 if ($(this).attr("id")) {
                     var colid = $(this).attr("id");
                     if (colid==currentorderby) {
-<<<<<<< HEAD
-                        if (currentorderway=="desc") //如果是升序，转为降序
-                            self.location.href = "?orderby="+colid+"&orderway=asc";
-                        else //如果是降序，取消当前排序
-                            self.location.href = "?"
-
-                    }
-                    else 
-                        self.location.href = "?orderby="+colid;
-=======
                         if (currentorderway=="desc") {   //如果是降序，转为升序
 							filter("orderby",colid);
 							filter("orderway","asc");
@@ -209,7 +184,6 @@
                     }
                     else 
 						filter("orderby",colid);
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
                 }
             })
         })
@@ -254,40 +228,28 @@
 	<h1 style="font-family:myfont;font-size: 50px">Grades Information</h1>
 
 	<select name="student" id="student">
-<<<<<<< HEAD
-=======
 			<option value="0">请选择学生</option>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			{volist name="student" id="s" }   
 			<option value="{$s.stu_id}">{$s.stu_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="major" id="major" >
-<<<<<<< HEAD
-=======
 			<option value="0">请选择专业</option>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			{volist name="major" id="m" }   
 			<option value="{$m.major_id}">{$m.major_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="course" id="course">
-<<<<<<< HEAD
-=======
 			<option value="0">请选择课程</option>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			{volist name="course" id="c" }   
 			<option value="{$c.course_id}">{$c.course_name}</option>
 			{/volist}   
 	</select>
 
 	<select name="teacher" id="teacher">
-<<<<<<< HEAD
-=======
 			<option value="0">请选择教师</option>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			{volist name="teacher" id="t" }   
 			<option value="{$t.tea_id}">{$t.tea_name}</option>
 			{/volist}   
@@ -300,16 +262,6 @@
 		<thead>
 			<tr>
 				<th>\</th>
-<<<<<<< HEAD
-				<th id="stu_rollno">学号<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="stu_name">学生姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="major_name">专业名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="course_name">课程名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="tea_name">教师姓名<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="mark">测试名称<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="mark">成绩<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-				<th id="type">类型<i class="fa fa-fw fa-sort-amount-desc"></i><i class="fa fa-fw fa-sort-amount-asc"></i></th>
-=======
 				<th id="stu_rollno">学号<i class="fa fa-fw {if $orderby == 'stu_rollno'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="stu_name">学生姓名<i class="fa fa-fw {if $orderby == 'stu_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="major_name">专业名称<i class="fa fa-fw {if $orderby == 'major_name'}fa-sort-amount-{$orderway}{/if}"></i></th>
@@ -318,16 +270,11 @@
 				<th id="mark">测试名称</th>
 				<th id="mark">成绩<i class="fa fa-fw {if $orderby == 'mark'}fa-sort-amount-{$orderway}{/if}"></i></th>
 				<th id="type">类型</th>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			</tr>
 		</thead>
 
 		{volist name="markTable" id="mark" }
-<<<<<<< HEAD
-		<tr>
-=======
 		<tr {if $_GET['page'] eq 1 && $i<=3} class="text-danger"{/if}>
->>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			<td><?php echo ( $_GET['page']?($_GET['page']*10-10+$i):$i  );?></td>
 			<td>{$mark.stu_rollno}</td>
 			<td>{$mark.stu_name}</td>
