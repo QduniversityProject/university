@@ -10,7 +10,6 @@ class Major extends Model
     public function Academy()
     {
         return $this->belongsTo("Academy", "academy_id", "academy_id");
-
     }
 }
 
