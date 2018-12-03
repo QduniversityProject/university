@@ -1,4 +1,4 @@
-drop database University;
+unteacherdrop database University;
 CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
 USE University;
 
@@ -1009,4 +1009,12 @@ FOREIGN KEY (test_id) REFERENCES untest (test_id)
 insert into unmark values(1,1,1,'96');
 insert into unmark values(2,1,1,'86');
 insert into unmark values(3,2,2,'66');
+insert into unmark values(4,1,1,'55');
+insert into unmark values(5,1,1,'76');
+insert into unmark values(6,2,2,'66');
+insert into unmark values(7,1,1,'52');
+insert into unmark values(8,1,1,'22');
+insert into unmark values(9,2,2,'66');
+insert into unmark values(10,1,1,'46');
+
 

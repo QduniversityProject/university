@@ -29,6 +29,11 @@
 		{
 			font-style: italic;
 		}
+        .yy
+        {
+            /* text-shadow: 10px 10px 50px #000; */
+
+        }
     
     </style>
 
@@ -102,18 +107,19 @@
 <body>
         {include file="Analysis/heads"/}
 <div id="example">
-    <select name="class" id="class" class="first">
-            <option value="0">请选择班级</option>
-            {volist name="class" id="cl" }   
-            <option value="{$cl.class_id}">{$cl.class_name}</option>
-            {/volist}   
-    </select>
+    <h1 class="yy">课程/班级成绩统计</h1>
     <select name="course" id="course" class="first">
         <option value="0">请选择课程</option>
         {volist name="course" id="co" }   
         <option value="{$co.course_id}">{$co.course_name}</option>
         {/volist}   
     </select>
+    <select name="class" id="class" class="first">
+        <option value="0">请选择班级</option>
+        {volist name="class" id="cl" }   
+        <option value="{$cl.class_id}">{$cl.class_name}</option>
+        {/volist}   
+</select>
     <hr>
     <hr>
     <hr>
@@ -123,12 +129,8 @@
     <div class="demo-section k-content wide">
         <div id="pie"></div>
     </div>
-
-<<<<<<< HEAD
-    <select name="student" id="student"> 
-=======
+<h1 class="yy">查看指定学生成绩</h1>
     <select name="student" id="student" class="first"> 
->>>>>>> add1aa5729e6378f96a20598d8c8c8c68bd73aeb
         <option value="0">请选择学生</option>
         {volist name="student" id="s" }   
         <option value="{$s.stu_id}">{$s.stu_name}</option>
