@@ -81,20 +81,24 @@
                 for (var i = 0; i < getString.length; i++) {
                     if (getString[i].indexOf(name)>=0) {
                         repeat=false;
-                        newUrl=oldUrl.replace(getString[i],name+'='+val)
+                        newUrl=oldUrl.replace(getString[i],name+'='+val);
                     }
                 }
                 if(repeat){
-                    newUrl=oldUrl+'&'+name+'='+val
+                    newUrl=oldUrl+'&'+name+'='+val;
                 }
             }else{
                 newUrl=oldUrl+'?'+name+'='+val;
             }
-            window.location=newUrl
+            window.location=newUrl;
         }
 
         $(document).ready(function() {
-			// $("#major option[value='3']").setAttribute("selected", "selected");
+			$("#major").val("{$major_id}");
+			$("#course").val("{$course_id}");
+			$("#teacher").val("{$tea_id}");
+			$("#student").val("{$stu_id}");
+			// $("#major option[value='{$major_id}']").setAttribute("selected", "selected");
 			$("#major").change(function() {
 				if($(this).val() == "0"){
 					// var url = self.location.href;
@@ -106,7 +110,6 @@
 				else{
 					filter("major_id",$(this).val());
 					// $("option").setAttribute("selected", "selected");
-					$(this).val("3");
 				}
             });
 			$("#course").change(function() {
@@ -115,7 +118,6 @@
 				}
 				else{
 					filter("course_id",$(this).val());
-					$(this).val("3");
 				}
             });
 			$("#teacher").change(function() {
@@ -124,7 +126,6 @@
 				}
 				else{
 					filter("tea_id",$(this).val());
-					$(this).val("3");
 				}
             });
 			$("#student").change(function() {
@@ -132,8 +133,7 @@
 					self.location.href = "?";
 				}
 				else{
-					filter("course_id",$(this).val());
-					$(this).val("3");
+					filter("stu_id",$(this).val());
 				}
             });
 
@@ -176,7 +176,7 @@
 
 							var lastchar = newurl2.substr(newurl2.length-1,1); //url最后一个字符
 							if (lastchar == "?" || lastchar == "&"){
-								newurl2 = newurl2.replace(lastchar, "");
+								newurl2 = newurl2.substr(0, newurl2.length-1);
 							}
 							self.location.href = newurl2;
 						}
