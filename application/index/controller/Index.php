@@ -8,7 +8,6 @@ class Index extends Controller
 {
     public function login()
     {
-        
         return $this->fetch();
     }
 
