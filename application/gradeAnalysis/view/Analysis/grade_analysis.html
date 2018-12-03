@@ -32,6 +32,72 @@
     
     </style>
 
+    <script type="text/javascript">
+        function getUrl(){
+            //匹配url中以?或&连接的字符，拆成数组
+            var url = document.URL.match(/[?&][^?&]+=[^?&]+/g);
+            if (url===null) {
+                return '';
+            }else{
+                for (var i = 0; i<url.length; i++) {
+                    url[i]=url[i].slice(1);
+                }
+            }
+            return url;
+        }
+        
+        function filter(name,val){
+            var getString=getUrl()
+            var oldUrl=document.URL;
+            var newUrl;
+            if (getString.length>0) {
+                var repeat=true;
+                for (var i = 0; i < getString.length; i++) {
+                    if (getString[i].indexOf(name)>=0) {
+                        repeat=false;
+                        newUrl=oldUrl.replace(getString[i],name+'='+val);
+                    }
+                }
+                if(repeat){
+                    newUrl=oldUrl+'&'+name+'='+val;
+                }
+            }else{
+                newUrl=oldUrl+'?'+name+'='+val;
+            }
+            window.location=newUrl;
+        }
+        $(document).ready(function() {
+			$("#course").val("{$course_id}");
+            $("#class").val("{$class_id}");
+            $("#student").val("{$stu_id}");
+
+            $("#class").change(function() {
+                    if($(this).val() == "0"){
+                        self.location.href = "?";
+                    }
+                    else{
+                        filter("class_id",$(this).val());
+                    }
+            });
+            $("#course").change(function() {
+                    if($(this).val() == "0"){
+                        self.location.href = "?";
+                    }
+                    else{
+                        filter("course_id",$(this).val());
+                    }
+            });
+            $("#student").change(function() {
+                    if($(this).val() == "0"){
+                        self.location.href = "?";
+                    }
+                    else{
+                        filter("stu_id",$(this).val());
+                    }
+            });
+        });
+    </script>
+
 </head>
 <body>
         {include file="Analysis/heads"/}
@@ -48,6 +114,9 @@
         <option value="{$co.course_id}">{$co.course_name}</option>
         {/volist}   
     </select>
+    <hr>
+    <hr>
+    <hr>
     <div class="demo-section k-content wide">
         <div id="chart"></div>
     </div>
@@ -95,7 +164,7 @@
 
     <script>
         function createChart() {
-
+            var avgmax = {$avgmax};
             $("#chart").kendoChart({
                 title: {
                     text: "各班级成绩分析"
@@ -103,13 +172,7 @@
                 legend: {
                     position: "bottom"
                 },
-                series: [{
-                        name: "平均分",
-                        data: [78,80,70,70,60,68,0,88,0,75]
-                    }, {
-                        name: "最高分",
-                        data: [90, 93, 80, 88, 87, 92, 0, 96, 0, 99]
-                }],
+                series: avgmax,
                 categoryAxis: {
                     categories: ["经济学院1班", "经济学院2班", "国防学院1班", "国防学院2班", "软件技术学院1班", "软件技术学院2班", "体育学院1班", "体育学院2班", "艺术学院1班","艺术学院2班"]
                 },

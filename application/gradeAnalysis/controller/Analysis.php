@@ -12,6 +12,17 @@ class Analysis extends Controller
         $class = Db::table('unclass')->select();
         $course = Db::table('uncourse')->select();
         $student = Db::table('unstudent')->select();
+        $this->assign('course_id', $course_id);
+        $this->assign('class_id', $class_id);
+        $this->assign('stu_id', $stu_id);
+
+        if ($course_id !== '0') {
+            $where['f.course_id'] = $course_id;
+        }
+        if ($class_id !== '0') {
+            $where['b.class_id'] = $class_id;
+        }
+
 
         $amgrade = Db::table('unmark')
         ->alias('a')
@@ -40,17 +51,27 @@ class Analysis extends Controller
         // ->where('f.course_id', $course_id)
         // ->group("b.class_id")
         // ->select();
-        
+
+        // halt($amgrade);
         // halt(json_encode($amgrade));
-        foreach ($amgrade as $key => $val){
-            $avg[$key] = $val['avg'];
-            $max[$key] = $val['max'];
+        if (count($amgrade) !== 0){
+            foreach ($amgrade as $key => $val){
+                $avg[$key] = $val['avg'];
+                $max[$key] = (int)$val['max'];
+            }
+            $avg1 = array('name' => '平均分', 'data' => $avg);
+            $max1 = array('name' => '最高分', 'data' => $max);
+            $avgmax = json_encode(array($avg1, $max1));
         }
+        else{
+            $this->error('没有查到相应成绩！');
+        }
+        
+        // halt(json_encode($avgmax));
         // $avg = array($amgrade[0]['avg'],$amgrade[1]['avg']);
         // halt($avg);
 
-        $where['f.course_id'] = $course_id;
-        $where['b.class_id'] = $class_id;
+
         $ccgrade1 = Db::table('unmark')
         ->alias('a')
         ->join('unstudent b', 'a.stu_id=b.stu_id ')
@@ -105,10 +126,15 @@ class Analysis extends Controller
         ->count();
 
         $total = $ccgrade1 + $ccgrade2 + $ccgrade3 + $ccgrade4;
-        $grade1 = $ccgrade1*100/$total;
-        $grade2 = $ccgrade2*100/$total;
-        $grade3 = $ccgrade3*100/$total;
-        $grade4 = $ccgrade4*100/$total;
+        if ($total !== 0){
+            $grade1 = $ccgrade1*100/$total;
+            $grade2 = $ccgrade2*100/$total;
+            $grade3 = $ccgrade3*100/$total;
+            $grade4 = $ccgrade4*100/$total;
+        }
+        else{
+            $this->error('没有查到相应成绩！');
+        }
         // halt($grade4);
 
         $stugrade = Db::table('unmark')
@@ -128,8 +154,7 @@ class Analysis extends Controller
         $this->assign('class', $class);
         $this->assign('course', $course);
         $this->assign('student', $student);
-        $this->assign('avg', $avg);
-        $this->assign('max', $max);
+        $this->assign('avgmax', $avgmax);
         $this->assign('grade1', $grade1);
         $this->assign('grade2', $grade2);
         $this->assign('grade3', $grade3);
