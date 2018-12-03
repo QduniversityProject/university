@@ -230,16 +230,16 @@ FOREIGN KEY (role_id) REFERENCES unrole (role_id)
 
 select * from unuser;
 
-insert into unuser values(1,'Leo','123','',3,0,1,'','','','');
-insert into unuser values(2,'Coulson','123','',3,0,1,'','','','');
-insert into unuser values(3,'Bill','123','',3,0,1,'','','','');
-insert into unuser values(8,'Shane','123','',3,0,1,'','','','');
+insert into unuser values(1,'Leo','202cb962ac59075b964b07152d234b70','',3,0,1,'','','','');
+insert into unuser values(2,'Coulson','202cb962ac59075b964b07152d234b70','',3,0,1,'','','','');
+insert into unuser values(3,'Bill','202cb962ac59075b964b07152d234b70','',3,0,1,'','','','');
+insert into unuser values(8,'Shane','202cb962ac59075b964b07152d234b70','',3,0,1,'','','','');
 
-insert into unuser values(4,'1000','123','',3,0,2,'','','','');
-insert into unuser values(5,'1001','123','',3,0,2,'','','','');
+insert into unuser values(4,'1000','202cb962ac59075b964b07152d234b70','',3,0,2,'','','','');
+insert into unuser values(5,'1001','202cb962ac59075b964b07152d234b70','',3,0,2,'','','','');
 
-insert into unuser values(6,'201540704102','123','',3,0,3,'','','','');
-insert into unuser values(7,'201540704602','123','',3,0,3,'','','','');
+insert into unuser values(6,'201540704102','202cb962ac59075b964b07152d234b70','',3,0,3,'','','','');
+insert into unuser values(7,'201540704602','202cb962ac59075b964b07152d234b70','',3,0,3,'','','','');
 select * from unuser;
 
 /*题库类型表*/ /*题库编号(主键) 题库类型*/
