@@ -50,8 +50,8 @@ class Index extends Controller
 		}
 
     	// 验证密码
-    	//if($has['user_password'] != md5($param['password'])){
-		if($has['user_password'] !== $param['password']){
+    	if($has['user_password'] != md5($param['password'])){
+		// if($has['user_password'] !== $param['password']){
 			if($has['user_count'] > 1){
 				$now['user_count'] = $has['user_count'] - 1;
 				Db::table('unuser')->where('user_id', $has['user_id'])->update($now);
