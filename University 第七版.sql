@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+drop database University;
+>>>>>>> 4e18e8639f0f767ebd15f58e4bf1c2987a3aff87
 CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
 USE University;
 
