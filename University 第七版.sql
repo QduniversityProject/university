@@ -1,4 +1,4 @@
-unteacherdrop database University;
+drop database University;
 CREATE DATABASE IF NOT EXISTS University DEFAULT CHARACTER SET utf8;
 USE University;
 
