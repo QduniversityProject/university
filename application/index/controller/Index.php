@@ -8,6 +8,10 @@ class Index extends Controller
 {
     public function login()
     {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
         return $this->fetch();
     }
 
@@ -39,7 +43,11 @@ class Index extends Controller
 		//验证帐号状态
 		if($has['user_status'] == 1){
 			$etime = ceil(30-((time() - $has['time_last_error'])/60));
+<<<<<<< HEAD
 			if((time() - $has['time_last_error']) > 10){
+=======
+			if((time() - $has['time_last_error']) > 1800){
+>>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 				$now['user_status'] = 0;  //若超过锁定时间，帐号恢复正常  （status-0)
 				Db::table('unuser')->where('user_id', $has['user_id'])->update($now);
 			}
@@ -49,8 +57,13 @@ class Index extends Controller
 		}
 
     	// 验证密码
+<<<<<<< HEAD
     	//if($has['user_password'] != md5($param['password'])){
 		if($has['user_password'] !== $param['password']){
+=======
+    	if($has['user_password'] != md5($param['password'])){
+		// if($has['user_password'] !== $param['password']){
+>>>>>>> 336b0b15050fe29376ac8ae3acdbe02ad7c42ec4
 			if($has['user_count'] > 1){
 				$now['user_count'] = $has['user_count'] - 1;
 				Db::table('unuser')->where('user_id', $has['user_id'])->update($now);
