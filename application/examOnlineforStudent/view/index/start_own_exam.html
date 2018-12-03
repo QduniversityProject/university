@@ -172,8 +172,8 @@
         <div class="info">
             <h5>题目({$i})：{$judgment.judgment_title}<br /></h5>
             选项：
-            <input type="checkbox" name="judgment{$i}" value="A">{$judgment.judgment_A}
-            <input type="checkbox" name="judgment{$i}" value="B">{$judgment.judgment_B}
+            <input type="radio" name="judgment{$i}" value="A">{$judgment.judgment_A}
+            <input type="radio" name="judgment{$i}" value="B">{$judgment.judgment_B}
             <!-- {$single.singleanswer_id} -->
         </div>
         {/volist}
