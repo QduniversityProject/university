@@ -13,17 +13,36 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/kendo.all.min.js"></script>
     
+    <style>
+        .first
+        {
+               
+                margin-top: 1%;
+                border-radius: 15px;
+				outline: none;
+				box-shadow:  0 2.5px 5px -1px black;
+				font-weight: bold;
+				float: left;
+				margin-bottom: 1%;
+        }
+        select:hover
+		{
+			font-style: italic;
+		}
+    
+    </style>
 
 </head>
 <body>
+        {include file="Analysis/heads"/}
 <div id="example">
-    <select name="class" id="class">
+    <select name="class" id="class" class="first">
             <option value="0">请选择班级</option>
             {volist name="class" id="cl" }   
             <option value="{$cl.class_id}">{$cl.class_name}</option>
             {/volist}   
     </select>
-    <select name="course" id="course">
+    <select name="course" id="course" class="first">
         <option value="0">请选择课程</option>
         {volist name="course" id="co" }   
         <option value="{$co.course_id}">{$co.course_name}</option>
@@ -36,7 +55,7 @@
         <div id="pie"></div>
     </div>
 
-    <select name="student" id="student">
+    <select name="student" id="student" class="first"> 
         <option value="0">请选择学生</option>
         {volist name="student" id="s" }   
         <option value="{$s.stu_id}">{$s.stu_name}</option>
@@ -149,7 +168,7 @@
         $(document).bind("kendo:skinChange", createChart);
     </script>
 </div>
-
+{include file="Analysis/footer"/}
 
 </body>
 </html>

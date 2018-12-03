@@ -145,7 +145,7 @@ insert into unclass values(10,'艺术学院2班',10);
 /*学生表*/ /*学生ID(主键) 学生学号 学生姓名 班级ID(外键) 学生生日 学生住址*/
 CREATE TABLE unstudent
 (
-stu_id int auto_increment primary key,
+stu_id int auto_increment,
 stu_rollno varchar(50) NOT NULL,
 stu_name varchar(50) NOT NULL,
 stu_sex varchar(50) NOT NULL,
@@ -230,6 +230,7 @@ select * from unuser;
 insert into unuser values(1,'Leo','123','',3,0,1,'','','','');
 insert into unuser values(2,'Coulson','123','',3,0,1,'','','','');
 insert into unuser values(3,'Bill','123','',3,0,1,'','','','');
+insert into unuser values(8,'Shane','123','',3,0,1,'','','','');
 
 insert into unuser values(4,'1000','123','',3,0,2,'','','','');
 insert into unuser values(5,'1001','123','',3,0,2,'','','','');
